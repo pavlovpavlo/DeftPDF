@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CreateAccountActivity">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/content_start"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/main_margin" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/content_end"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/main_margin" />
+
+    <ImageView
+        android:id="@+id/back_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="43dp"
+        android:src="@drawable/ic_back_arrow"
+        app:layout_constraintStart_toStartOf="@id/content_start"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/roboto_reg"
+        android:text="@string/forgot_your_password"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@id/content_start"
+        app:layout_constraintTop_toBottomOf="@id/back_btn" />
+
+    <TextView
+        android:id="@+id/title_second"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/roboto_reg"
+        android:text="@string/forgot_text"
+        android:textColor="@color/gray_87"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="@id/content_start"
+        app:layout_constraintTop_toBottomOf="@id/title" />
+
+    <TextView
+        android:id="@+id/title_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/roboto_reg"
+        android:text="@string/email"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@id/content_start"
+        app:layout_constraintTop_toBottomOf="@id/title_second" />
+
+    <EditText
+        android:id="@+id/email_edittext"
+        android:layout_width="0dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/ic_edittext_bg"
+        android:fontFamily="@font/roboto_reg"
+        android:inputType="textEmailAddress"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:textColor="#878787"
+        android:textCursorDrawable="@null"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@id/content_end"
+        app:layout_constraintStart_toStartOf="@id/content_start"
+        app:layout_constraintTop_toBottomOf="@id/title_email" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/reset_pass"
+        android:layout_width="0dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/ic_main_btn"
+        android:elevation="0dp"
+        android:fontFamily="@font/robobo_medium"
+        android:stateListAnimator="@null"
+        android:text="@string/reset_password"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="@id/content_end"
+        app:layout_constraintStart_toStartOf="@id/content_start"
+        app:layout_constraintTop_toBottomOf="@id/email_edittext" />
+
+
+    <TextView
+        android:id="@+id/create_account_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:fontFamily="@font/roboto_reg"
+        android:text="@string/don_t_have_an_account"
+        android:textColor="@color/gray_87"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/create_account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_reg"
+        android:text="@string/create_an_account"
+        android:textColor="@color/main"
+        android:textSize="14sp" />
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="30dp"
+        app:constraint_referenced_ids="create_account_title,create_account"
+        app:flow_horizontalGap="3dp"
+        app:flow_horizontalStyle="packed"
+        app:flow_wrapMode="chain"
+        app:layout_constraintEnd_toEndOf="@id/content_end"
+        app:layout_constraintStart_toStartOf="@id/content_start"
+        app:layout_constraintTop_toBottomOf="@id/reset_pass" />
+
+    <TextView
+        android:id="@+id/have_account_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:fontFamily="@font/roboto_reg"
+        android:text="@string/already_have_an_account"
+        android:textColor="@color/gray_87"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/have_account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_reg"
+        android:text="@string/login"
+        android:textColor="@color/main"
+        android:textSize="14sp" />
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        app:constraint_referenced_ids="have_account_title,have_account"
+        app:flow_horizontalGap="3dp"
+        app:flow_horizontalStyle="packed"
+        app:flow_wrapMode="chain"
+        app:layout_constraintEnd_toEndOf="@id/content_end"
+        app:layout_constraintStart_toStartOf="@id/content_start"
+        app:layout_constraintTop_toBottomOf="@id/create_account_title" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

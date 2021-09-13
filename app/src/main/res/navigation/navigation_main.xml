@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/navigation_home"
+    android:id="@+id/navigation_main">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.sign.deftpdf.HomeFragment"
+        tools:layout="@layout/fragment_home"
+        android:label="fragment_home" />
+    <fragment
+        android:id="@+id/navigation_documents"
+        android:name="com.sign.deftpdf.DocumentsFragment"
+        tools:layout="@layout/fragment_document"
+        android:label="fragment_document" />
+    <fragment
+        android:id="@+id/navigation_library"
+        android:name="com.sign.deftpdf.LibraryFragment"
+        tools:layout="@layout/fragment_library"
+        android:label="fragment_library" />
+    <fragment
+        android:id="@+id/navigation_account"
+        android:name="com.sign.deftpdf.AccountFragment"
+        tools:layout="@layout/fragment_account"
+        android:label="fragment_account" />
+</navigation>

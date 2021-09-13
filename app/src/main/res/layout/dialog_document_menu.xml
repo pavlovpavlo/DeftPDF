@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="5dp">
+
+    <include
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        layout="@layout/item_documents"
+        android:layout_marginStart="@dimen/main_margin"
+        android:layout_marginEnd="@dimen/main_margin"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/gray_f0"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="15dp">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:src="@drawable/ic_document_details"
+            android:layout_height="24dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="11dp"
+            android:fontFamily="@font/roboto_reg"
+            android:text="@string/details_and_activity"
+            android:includeFontPadding="false"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="15dp">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:src="@drawable/ic_document_sign"
+            android:layout_height="24dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="11dp"
+            android:fontFamily="@font/roboto_reg"
+            android:text="@string/sign_myself"
+            android:includeFontPadding="false"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="15dp">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:src="@drawable/ic_document_request"
+            android:layout_height="24dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="11dp"
+            android:fontFamily="@font/roboto_reg"
+            android:text="@string/request_signature"
+            android:includeFontPadding="false"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="@color/gray_f0"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="15dp">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:src="@drawable/ic_document_rename"
+            android:layout_height="24dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="11dp"
+            android:fontFamily="@font/roboto_reg"
+            android:text="@string/rename"
+            android:includeFontPadding="false"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="15dp">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:src="@drawable/ic_document_delete"
+            android:layout_height="24dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="11dp"
+            android:fontFamily="@font/roboto_reg"
+            android:text="@string/delete"
+            android:includeFontPadding="false"
+            android:textColor="@color/red"
+            android:textSize="14sp" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <include
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="15dp"
+            android:layout_marginStart="15dp"
+            layout="@layout/item_user"/>
+
+        <View
+            android:id="@+id/main_line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/gray_f0"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/roboto_reg"
+            android:text="@string/name"
+            android:layout_marginEnd="15dp"
+            android:layout_marginStart="15dp"
+            android:textColor="@color/black"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/name_text"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginStart="15dp"
+            android:textCursorDrawable="@null"
+            android:text="Jack Black"
+            android:gravity="center_vertical"
+            android:background="@drawable/ic_edittext_bg"
+            android:fontFamily="@font/roboto_reg"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:textColor="@color/gray_87"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginStart="15dp"
+            android:fontFamily="@font/roboto_reg"
+            android:text="@string/email"
+            android:textColor="@color/black"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/email_text"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginStart="15dp"
+            android:background="@drawable/ic_edittext_bg"
+            android:text="willie.jennings@example.com"
+            android:fontFamily="@font/roboto_reg"
+            android:gravity="center_vertical"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:textColor="@color/gray_87"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/change_password"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginStart="15dp"
+            android:background="@drawable/ic_edittext_bg"
+            android:text="@string/change_password"
+            android:fontFamily="@font/roboto_reg"
+            android:gravity="center_vertical"
+            android:drawableStart="@drawable/ic_key"
+            android:drawableEnd="@drawable/ic_arrow_right"
+            android:drawablePadding="15dp"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="15dp"
+            android:background="@color/gray_f0"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginStart="15dp"
+            android:fontFamily="@font/roboto_reg"
+            android:text="@string/signs"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_marginEnd="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            app:cardCornerRadius="7dp"
+            app:cardElevation="2dp"
+            android:layout_height="150dp">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:background="@color/transparent"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_signs_def"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_reg"
+                        android:textColor="@color/gray_87"
+                        android:layout_marginTop="13dp"
+                        android:text="@string/you_don_t_have_any_sign"
+                        android:textSize="15sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/robobo_medium"
+                        android:textColor="@color/main"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/add_a_sign"
+                        android:textSize="15sp"/>
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="15dp"
+            android:background="@color/gray_f0"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginStart="15dp"
+            android:fontFamily="@font/roboto_reg"
+            android:text="@string/initials"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_marginEnd="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            app:cardCornerRadius="7dp"
+            app:cardElevation="2dp"
+            android:layout_height="150dp">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:background="@color/transparent"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_signs_def"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_reg"
+                        android:textColor="@color/gray_87"
+                        android:layout_marginTop="13dp"
+                        android:text="@string/you_don_t_have_any_initial"
+                        android:textSize="15sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/robobo_medium"
+                        android:textColor="@color/main"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/add_an_initial"
+                        android:textSize="15sp"/>
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

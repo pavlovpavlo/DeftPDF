@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="14dp"
+        android:fontFamily="@font/robobo_medium"
+        android:text="@string/share_via"
+        android:textColor="@color/black"
+        android:textSize="14sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="14dp"
+        android:background="@color/line" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="15dp">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:src="@drawable/ic_share_email"
+            android:layout_height="24dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="11dp"
+            android:fontFamily="@font/roboto_reg"
+            android:text="@string/email"
+            android:includeFontPadding="false"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="15dp">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:src="@drawable/ic_share_box"
+            android:layout_height="24dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="11dp"
+            android:fontFamily="@font/roboto_reg"
+            android:text="@string/box"
+            android:includeFontPadding="false"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="15dp">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:src="@drawable/ic_share_dropbox"
+            android:layout_height="24dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="11dp"
+            android:fontFamily="@font/roboto_reg"
+            android:text="@string/dropbox"
+            android:includeFontPadding="false"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="15dp">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:src="@drawable/ic_share_google_drive"
+            android:layout_height="24dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="11dp"
+            android:fontFamily="@font/roboto_reg"
+            android:text="@string/google_drive"
+            android:includeFontPadding="false"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="15dp">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:src="@drawable/ic_share_evernote"
+            android:layout_height="24dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="11dp"
+            android:fontFamily="@font/roboto_reg"
+            android:text="@string/evernote"
+            android:includeFontPadding="false"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="15dp">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:src="@drawable/ic_share_onedrive"
+            android:layout_height="24dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="11dp"
+            android:fontFamily="@font/roboto_reg"
+            android:text="@string/onedrive"
+            android:includeFontPadding="false"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="15dp">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:src="@drawable/ic_share_other"
+            android:layout_height="24dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="11dp"
+            android:fontFamily="@font/roboto_reg"
+            android:text="@string/other_apps"
+            android:includeFontPadding="false"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+    </LinearLayout>
+</LinearLayout>

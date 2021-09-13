@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="10dp"
+    android:paddingTop="10dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ImageView
+        android:id="@+id/notification_image"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_notification"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/notification_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_reg"
+        android:text="Document Name 1 status changed"
+        android:layout_marginStart="15dp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toTopOf="@id/notification_image"
+        app:layout_constraintStart_toEndOf="@id/notification_image"
+        app:layout_constraintBottom_toTopOf="@id/notification_date"
+        android:textSize="15sp"/>
+
+    <TextView
+        android:id="@+id/notification_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_reg"
+        android:text="Document name 1 has been signed"
+        android:layout_marginStart="15dp"
+        android:textColor="@color/gray_87"
+        app:layout_constraintTop_toBottomOf="@id/notification_name"
+        app:layout_constraintBottom_toBottomOf="@id/notification_image"
+        app:layout_constraintStart_toEndOf="@id/notification_image"
+        android:textSize="12sp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

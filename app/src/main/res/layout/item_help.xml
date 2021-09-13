@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/question_container"
+    android:clickable="true"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:gravity="center_vertical"
+        android:paddingTop="13dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:id="@+id/item_title"
+            android:text="Question 1"
+            android:fontFamily="@font/robobo_medium"
+            android:textColor="@color/black"
+            android:textSize="18sp"/>
+        <ImageView
+            android:id="@+id/icon_draw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow_close"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/sub_item"
+        android:visibility="gone"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginBottom="2dp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/sub_item_text"
+            android:fontFamily="@font/roboto_reg"
+            android:textSize="14sp"
+            android:textColorLink="@color/gray_87"
+            android:textColor="@color/gray_87"
+            android:text="Amet, consectetur adipiscing elit. Egestas lorem odio facilisis malesuada vel arcu eget." />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="13dp"
+        android:background="@color/gray_f0"
+        android:id="@+id/item_divider" />
+</LinearLayout>

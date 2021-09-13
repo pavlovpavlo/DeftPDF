@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RequestSignatureActivity">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/content_start"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/main_margin" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/content_end"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/main_margin" />
+
+    <ImageView
+        android:id="@+id/back_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/ic_back_arrow"
+        app:layout_constraintStart_toStartOf="@id/content_start"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_reg"
+        android:text="@string/request_signature"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@id/back_btn"
+        app:layout_constraintEnd_toEndOf="@id/content_end"
+        app:layout_constraintStart_toStartOf="@id/content_start"
+        app:layout_constraintTop_toTopOf="@id/back_btn" />
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/filter_flow"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        app:constraint_referenced_ids="email_tab,link_tab"
+        app:flow_horizontalBias="0"
+        app:flow_horizontalGap="5dp"
+        app:flow_horizontalStyle="packed"
+        app:flow_verticalGap="5dp"
+        app:flow_verticalStyle="packed"
+        app:flow_wrapMode="chain"
+        app:layout_constraintEnd_toEndOf="@id/content_end"
+        app:layout_constraintStart_toStartOf="@id/content_start"
+        app:layout_constraintTop_toBottomOf="@id/back_btn" />
+
+    <TextView
+        android:id="@+id/email_tab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_document_filter_bg"
+        android:fontFamily="@font/robobo_medium"
+        android:paddingStart="15dp"
+        android:paddingTop="12dp"
+        android:paddingEnd="15dp"
+        android:paddingBottom="12dp"
+        android:text="@string/email"
+        android:textColor="@color/white"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/link_tab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_document_filter_off_bg"
+        android:fontFamily="@font/robobo_medium"
+        android:paddingStart="15dp"
+        android:paddingTop="12dp"
+        android:paddingEnd="15dp"
+        android:paddingBottom="12dp"
+        android:text="@string/link"
+        android:textColor="@color/main"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/title_name_link"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/roboto_reg"
+        android:text="@string/recepients_name"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@id/content_start"
+        app:layout_constraintTop_toBottomOf="@id/filter_flow" />
+
+    <EditText
+        android:id="@+id/name_edittext_link"
+        android:layout_width="0dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/ic_edittext_bg"
+        android:fontFamily="@font/roboto_reg"
+        android:inputType="text"
+        android:maxLines="1"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:textColor="#878787"
+        android:textCursorDrawable="@null"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@id/content_end"
+        app:layout_constraintStart_toStartOf="@id/content_start"
+        app:layout_constraintTop_toBottomOf="@id/title_name_link" />
+
+    <TextView
+        android:id="@+id/title_link"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/roboto_reg"
+        android:text="@string/link"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@id/content_start"
+        app:layout_constraintTop_toBottomOf="@id/name_edittext_link" />
+
+    <EditText
+        android:id="@+id/link_edittext"
+        android:layout_width="0dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/ic_edittext_bg"
+        android:fontFamily="@font/roboto_reg"
+        android:inputType="textEmailAddress"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:textColor="#878787"
+        android:textCursorDrawable="@null"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@id/content_end"
+        app:layout_constraintStart_toStartOf="@id/content_start"
+        app:layout_constraintTop_toBottomOf="@id/title_link" />
+
+    <ImageView
+        android:id="@+id/copy_link"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_copy_link"
+        app:layout_constraintEnd_toEndOf="@id/link_edittext"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintBottom_toBottomOf="@id/link_edittext"
+        app:layout_constraintTop_toTopOf="@id/link_edittext"/>
+
+
+    <TextView
+        android:id="@+id/title_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/roboto_reg"
+        android:text="@string/recepients_name"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@id/content_start"
+        app:layout_constraintTop_toBottomOf="@id/filter_flow" />
+
+    <EditText
+        android:id="@+id/name_edittext"
+        android:layout_width="0dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/ic_edittext_bg"
+        android:fontFamily="@font/roboto_reg"
+        android:inputType="text"
+        android:maxLines="1"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:textColor="#878787"
+        android:textCursorDrawable="@null"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@id/content_end"
+        app:layout_constraintStart_toStartOf="@id/content_start"
+        app:layout_constraintTop_toBottomOf="@id/title_name" />
+
+    <TextView
+        android:id="@+id/title_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/roboto_reg"
+        android:text="@string/email"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@id/content_start"
+        app:layout_constraintTop_toBottomOf="@id/name_edittext" />
+
+    <EditText
+        android:id="@+id/email_edittext"
+        android:layout_width="0dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/ic_edittext_bg"
+        android:fontFamily="@font/roboto_reg"
+        android:inputType="textEmailAddress"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:textColor="#878787"
+        android:textCursorDrawable="@null"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@id/content_end"
+        app:layout_constraintStart_toStartOf="@id/content_start"
+        app:layout_constraintTop_toBottomOf="@id/title_email" />
+
+    <TextView
+        android:id="@+id/title_note"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/roboto_reg"
+        android:text="@string/add_a_note"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@id/content_start"
+        app:layout_constraintTop_toBottomOf="@id/email_edittext" />
+
+    <EditText
+        android:id="@+id/note_edittext"
+        android:layout_width="0dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/ic_edittext_bg"
+        android:fontFamily="@font/roboto_reg"
+        android:inputType="textMultiLine"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:textColor="#878787"
+        android:textCursorDrawable="@null"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@id/content_end"
+        app:layout_constraintStart_toStartOf="@id/content_start"
+        app:layout_constraintTop_toBottomOf="@id/title_note" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_email"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="visible"
+        app:constraint_referenced_ids="title_name, name_edittext, title_email
+        , email_edittext, title_note, note_edittext" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_link"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:constraint_referenced_ids="title_name_link, name_edittext_link, title_link
+        , link_edittext, copy_link" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/send_request"
+        android:layout_width="0dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/ic_main_btn"
+        android:elevation="0dp"
+        android:fontFamily="@font/robobo_medium"
+        android:stateListAnimator="@null"
+        android:text="@string/send_request"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/content_end"
+        app:layout_constraintStart_toStartOf="@id/content_start" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

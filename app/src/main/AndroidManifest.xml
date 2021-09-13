@@ -9,13 +9,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DeftPDF">
-        <activity android:name=".MainActivity">
+        <activity android:name=".DocumentDetailsActivity"></activity>
+        <activity android:name=".RequestSignatureActivity" />
+        <activity android:name=".ForgotPassActivity" />
+        <activity android:name=".CreateAccountActivity" />
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".CheckAuthActivity" />
+        <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>
