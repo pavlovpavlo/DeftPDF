@@ -5,7 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.sign.deftpdf.databinding.ActivityCheckAuthBinding
-import com.sign.deftpdf.databinding.ActivityCreateAccountBinding
+import com.sign.deftpdf.ui.login.LoginActivity
+import com.sign.deftpdf.ui.registration.CreateAccountActivity
 
 class CheckAuthActivity : AppCompatActivity(R.layout.activity_check_auth) {
 
