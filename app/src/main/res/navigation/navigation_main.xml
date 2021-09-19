@@ -7,17 +7,17 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.sign.deftpdf.ui.home.HomeFragment"
+        android:name="com.sign.deftpdf.ui.documents_screens.home.HomeFragment"
         tools:layout="@layout/fragment_home"
         android:label="fragment_home" />
     <fragment
         android:id="@+id/navigation_documents"
-        android:name="com.sign.deftpdf.DocumentsFragment"
+        android:name="com.sign.deftpdf.ui.documents_screens.documents.DocumentsFragment"
         tools:layout="@layout/fragment_document"
         android:label="fragment_document" />
     <fragment
         android:id="@+id/navigation_library"
-        android:name="com.sign.deftpdf.LibraryFragment"
+        android:name="com.sign.deftpdf.ui.documents_screens.library.LibraryFragment"
         tools:layout="@layout/fragment_library"
         android:label="fragment_library" />
     <fragment
@@ -25,4 +25,24 @@
         android:name="com.sign.deftpdf.ui.account.AccountFragment"
         tools:layout="@layout/fragment_account"
         android:label="fragment_account" />
+    <fragment
+        android:id="@+id/navigation_account_setting"
+        android:name="com.sign.deftpdf.ui.account.AccountSettingFragment"
+        tools:layout="@layout/fragment_account_settings"
+        android:label="fragment_account_settings" />
+    <fragment
+        android:id="@+id/navigation_help"
+        android:name="com.sign.deftpdf.HelpFragment"
+        tools:layout="@layout/fragment_help"
+        android:label="fragment_help" />
+    <fragment
+        android:id="@+id/navigation_change_password"
+        android:name="com.sign.deftpdf.ui.change_password.ChangePasswordFragment"
+        tools:layout="@layout/fragment_change_password"
+        android:label="fragment_change_password" />
+    <fragment
+        android:id="@+id/navigation_notification"
+        android:name="com.sign.deftpdf.ui.notification.NotificationFragment"
+        tools:layout="@layout/fragment_notifications"
+        android:label="fragment_notifications" />
 </navigation>

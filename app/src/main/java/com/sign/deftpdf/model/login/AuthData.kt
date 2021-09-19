@@ -7,6 +7,6 @@ import com.squareup.moshi.Json
 
 
 class AuthData {
-    @field:Json(name = "token")
+    @SerializedName("token")
     var token: String? = null
 }

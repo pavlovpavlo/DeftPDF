@@ -173,4 +173,10 @@
         app:layout_constraintEnd_toEndOf="@id/content_end"
         app:layout_constraintTop_toBottomOf="@id/login_google" />
 
+    <include layout="@layout/layout_error"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_marginTop="15dp"
+        app:layout_constraintTop_toBottomOf="@id/back_btn"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

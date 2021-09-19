@@ -16,26 +16,31 @@
 
     <TextView
         android:id="@+id/document_name"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_reg"
         android:text="Document Name 1"
+        android:ellipsize="end"
+        android:maxLines="1"
         android:layout_marginStart="15dp"
         android:textColor="@color/black"
         app:layout_constraintTop_toTopOf="@id/document_image"
         app:layout_constraintStart_toEndOf="@id/document_image"
+        app:layout_constraintEnd_toStartOf="@id/document_detail"
         app:layout_constraintBottom_toTopOf="@id/document_date"
         android:textSize="15sp"/>
 
     <TextView
         android:id="@+id/document_date"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_reg"
         android:text="Sep 01, 2021 - 06:11 am"
         android:layout_marginStart="15dp"
         android:textColor="@color/gray_87"
         app:layout_constraintTop_toBottomOf="@id/document_name"
+
+        app:layout_constraintEnd_toStartOf="@id/document_detail"
         app:layout_constraintBottom_toBottomOf="@id/document_image"
         app:layout_constraintStart_toEndOf="@id/document_image"
         android:textSize="12sp"/>

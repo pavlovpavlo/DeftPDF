@@ -1,28 +1,32 @@
 package com.sign.deftpdf.ui.registration
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.util.Patterns
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.sign.deftpdf.ui.login.LoginActivity
+import com.sign.deftpdf.DeftApp
 import com.sign.deftpdf.R
 import com.sign.deftpdf.base.BaseActivity
 import com.sign.deftpdf.databinding.ActivityCreateAccountBinding
 import com.sign.deftpdf.model.login.AuthModel
-import com.sign.deftpdf.ui.MainActivity
-import com.sign.deftpdf.ui.login.LoginPresenter
+import com.sign.deftpdf.model.user.UserModel
+import com.sign.deftpdf.ui.main.GetUserPresenter
+import com.sign.deftpdf.ui.main.GetUserView
+import com.sign.deftpdf.util.LocalSharedUtil
 
-class CreateAccountActivity : BaseActivity(R.layout.activity_create_account), CreateAccountView{
+class CreateAccountActivity : BaseActivity(R.layout.activity_create_account), CreateAccountView,
+        GetUserView {
 
     private val binding by viewBinding(ActivityCreateAccountBinding::bind)
     private val presenter: CreateAccountPresenter = CreateAccountPresenter(this)
+    private val presenterUser: GetUserPresenter = GetUserPresenter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        presenter.attachView(this)
+        presenterUser.attachView(this)
         initListeners()
     }
 
@@ -82,16 +86,15 @@ class CreateAccountActivity : BaseActivity(R.layout.activity_create_account), Cr
             showError("Pass or email incorrect")
     }
 
-    private fun openMain(){
-        startActivity(Intent(this, MainActivity::class.java))
-        finishAffinity()
-    }
-
-    private fun openLogin(){
-        startActivity(Intent(this, LoginActivity::class.java))
-    }
-
     override fun createAccountSuccess(data: AuthModel) {
-       openMain()
+        data.data?.token?.let {
+            LocalSharedUtil().setTokenParameter(it, this)
+            presenterUser.sendResponse(it)
+        }
+    }
+
+    override fun getUserSuccess(data: UserModel) {
+        DeftApp.user = data.data!!
+        openMain()
     }
 }

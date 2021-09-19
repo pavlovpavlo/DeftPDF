@@ -1,13 +1,13 @@
 package com.sign.deftpdf.model
 
-import com.squareup.moshi.Json
+import com.google.gson.annotations.SerializedName
 
 
 open class BaseModel() {
-    @field:Json(name = "success")
+    @SerializedName("success")
     var success: Boolean? = null
 
-    @field:Json(name = "message")
+    @SerializedName("message")
     var message: List<String>? = null
 
 }

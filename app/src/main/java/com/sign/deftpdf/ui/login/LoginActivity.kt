@@ -6,23 +6,28 @@ import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.util.Patterns.EMAIL_ADDRESS
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.sign.deftpdf.DeftApp
 import com.sign.deftpdf.ui.forgot.ForgotPassActivity
 import com.sign.deftpdf.R
 import com.sign.deftpdf.base.BaseActivity
 import com.sign.deftpdf.databinding.ActivityLoginBinding
 import com.sign.deftpdf.model.login.AuthModel
-import com.sign.deftpdf.ui.MainActivity
-import com.sign.deftpdf.ui.registration.CreateAccountActivity
+import com.sign.deftpdf.model.user.UserModel
+import com.sign.deftpdf.ui.main.GetUserPresenter
+import com.sign.deftpdf.ui.main.GetUserView
+import com.sign.deftpdf.util.LocalSharedUtil
 
-class LoginActivity : BaseActivity(R.layout.activity_login), LoginView {
+class LoginActivity : BaseActivity(R.layout.activity_login), LoginView, GetUserView {
 
     private val binding by viewBinding(ActivityLoginBinding::bind)
     private val presenter: LoginPresenter = LoginPresenter(this)
+    private val presenterUser: GetUserPresenter = GetUserPresenter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         presenter.attachView(this)
+        presenterUser.attachView(this)
         initListeners()
     }
 
@@ -67,20 +72,20 @@ class LoginActivity : BaseActivity(R.layout.activity_login), LoginView {
             showError("Pass or email incorrect")
     }
 
-    private fun openMain() {
-        startActivity(Intent(this, MainActivity::class.java))
-        finishAffinity()
-    }
-
-    private fun openCreateAccount() {
-        startActivity(Intent(this, CreateAccountActivity::class.java))
-    }
-
     private fun openForgotPass() {
         startActivity(Intent(this, ForgotPassActivity::class.java))
     }
 
     override fun loginSuccess(data: AuthModel) {
+
+        data.data?.token?.let {
+            LocalSharedUtil().setTokenParameter(it, this)
+            presenterUser.sendResponse(it)
+        }
+    }
+
+    override fun getUserSuccess(data: UserModel) {
+        DeftApp.user = data.data!!
         openMain()
     }
 }

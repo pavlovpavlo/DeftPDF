@@ -1,7 +1,8 @@
-package com.sign.deftpdf
+package com.sign.deftpdf.ui.documents_screens.document
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.sign.deftpdf.R
 
 class DocumentDetailsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

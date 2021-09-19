@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:id="@+id/error_notification"
+    android:background="@color/red"
+    android:visibility="gone"
+    android:paddingBottom="15dp"
+    android:paddingTop="10dp"
+    android:paddingStart="15dp"
+    android:paddingEnd="15dp"
+    android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/notification_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:includeFontPadding="false"
+        android:layout_weight="1"
+        android:layout_marginTop="5dp"
+        android:background="@color/transparent"
+        android:fontFamily="@font/roboto_reg"
+        android:textSize="14sp"
+        android:textColor="@color/white"
+        android:text="Your email or password was incorrect. Please try again. "/>
+
+    <ImageView
+        android:id="@+id/error_exit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_icon_del"
+        android:background="@color/transparent"
+        android:layout_marginStart="8dp"/>
+
+</LinearLayout>

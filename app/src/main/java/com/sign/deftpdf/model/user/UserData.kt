@@ -1,55 +1,55 @@
 package com.sign.deftpdf.model.user
 
-import com.squareup.moshi.Json
+import com.google.gson.annotations.SerializedName
 
 
 class UserData {
-    @field:Json(name = "id")
+    @SerializedName("id")
     var id: Int? = null
 
-    @field:Json(name = "email")
+    @SerializedName("email")
     var email: String? = null
 
-    @field:Json(name = "role")
+    @SerializedName("role")
     var role: String? = null
 
-    @field:Json(name = "api_token")
+    @SerializedName("api_token")
     var apiToken: String? = null
 
-    @field:Json(name = "google_id")
+    @SerializedName("google_id")
     var googleId: String? = null
 
-    @field:Json(name = "stripe_customer_id")
+    @SerializedName("stripe_customer_id")
     var stripeCustomerId: String? = null
 
-    @field:Json(name = "stripe_subscription_id")
+    @SerializedName("stripe_subscription_id")
     var stripeSubscriptionId: String? = null
 
-    @field:Json(name = "stripe_price_id")
+    @SerializedName("stripe_price_id")
     var stripePriceId: String? = null
 
-    @field:Json(name = "register_token")
+    @SerializedName("register_token")
     var registerToken: String? = null
 
-    @field:Json(name = "status")
+    @SerializedName("status")
     var status: String? = null
 
-    @field:Json(name = "avatar")
+    @SerializedName("avatar")
     var avatar: String? = null
 
-    @field:Json(name = "name")
+    @SerializedName("name")
     var name: String? = null
 
-    @field:Json(name = "created_at")
+    @SerializedName("created_at")
     var createdAt: String? = null
 
-    @field:Json(name = "updated_at")
+    @SerializedName("updated_at")
     var updatedAt: String? = null
 
-    @field:Json(name = "last_activity")
+    @SerializedName("last_activity")
     var lastActivity: String? = null
 
-    @field:Json(name = "last_confirmation")
+    @SerializedName("last_confirmation")
     var lastConfirmation: String? = null
 
 }

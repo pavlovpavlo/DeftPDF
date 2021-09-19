@@ -1,9 +1,10 @@
-package com.sign.deftpdf
+package com.sign.deftpdf.ui.check_auth
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.sign.deftpdf.R
 import com.sign.deftpdf.databinding.ActivityCheckAuthBinding
 import com.sign.deftpdf.ui.login.LoginActivity
 import com.sign.deftpdf.ui.registration.CreateAccountActivity

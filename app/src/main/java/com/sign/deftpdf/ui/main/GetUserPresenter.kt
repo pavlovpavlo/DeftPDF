@@ -1,4 +1,4 @@
-package com.sign.deftpdf.ui
+package com.sign.deftpdf.ui.main
 
 import com.sign.deftpdf.api.ApiService
 import com.sign.deftpdf.api.RetrofitClient
@@ -26,7 +26,7 @@ class GetUserPresenter(basicView: BasicView) : BasePresenter(basicView) {
                 .subscribeOn(Schedulers.io())
                 .subscribe({ response ->
                     if (response.success == true)
-                        view.getUserSuccessSuccess(response)
+                        view.getUserSuccess(response)
                     else
                         super.showError(response.message.toString())
                     super.stopLoader()

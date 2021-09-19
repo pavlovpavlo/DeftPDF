@@ -62,4 +62,6 @@
     <string name="initials">Initials</string>
     <string name="you_don_t_have_any_initial">You don’t have any initial</string>
     <string name="add_an_initial">+ Add an Initial</string>
+    <string name="no_internet">Slow or no internet connection.<br/>Please check your internet settings</string>
+    <string name="try_again">Try Again</string>
 </resources>
