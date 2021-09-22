@@ -9,7 +9,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sign.deftpdf.R
 import com.sign.deftpdf.model.documents.DocumentData
 
-class DocumentsAdapter (private var mList: List<DocumentData>) : RecyclerView.Adapter<DocumentsAdapter.ViewHolder>() {
+class DocumentsAdapter(private var mList: List<DocumentData>) : RecyclerView.Adapter<DocumentsAdapter.ViewHolder>() {
+
+    interface OnDocumentClickListener {
+        fun onDetailClick(position: Int)
+        fun onItemClick(position: Int)
+    }
+
+    lateinit var listener: OnDocumentClickListener
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
@@ -24,10 +31,28 @@ class DocumentsAdapter (private var mList: List<DocumentData>) : RecyclerView.Ad
 
         holder.documentName.text = documentData.originalName
         holder.documentDate.text = documentData.createdAt
+        holder.itemView.setOnClickListener { listener.onItemClick(position) }
+        holder.documentDetail.setOnClickListener { listener.onDetailClick(position) }
 
+        holder.documentImage.setImageResource(when (documentData.status) {
+            "original" -> {
+                R.drawable.ic_document_original
+            }
+            "signed" -> {
+                R.drawable.ic_document_signed
+            }
+            "pending" -> {
+                R.drawable.ic_document_pending
+            }
+            "draft" -> {
+                R.drawable.ic_document_draft
+            }
+            else ->
+                R.drawable.ic_document_original
+        })
     }
 
-    fun setDocuments(list :List<DocumentData>){
+    fun setDocuments(list: List<DocumentData>) {
         mList = list
         notifyDataSetChanged()
     }

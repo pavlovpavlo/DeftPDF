@@ -2,6 +2,7 @@ package com.sign.deftpdf.util
 
 import android.content.Context
 import android.net.Uri
+import com.sign.deftpdf.DeftApp
 import com.sign.deftpdf.api.ApiService
 import com.sign.deftpdf.api.RetrofitClient
 import java.io.File
@@ -11,8 +12,11 @@ import java.util.*
 
 object Util {
     const val BASE_URL = "http://pdf.webstaginghub.com/api/"
+    const val DATA_URL = "http://pdf.webstaginghub.com/"
     var MIMETYPE_PDF = "application/pdf"
     var SORT_BY = "created_at"
+    var SORT_DESC = "desc"
+    var SORT_ASC = "asc"
     var STATUS_SIGNED = "signed"
     var STATUS_DRAFT = "draft"
     var STATUS_PENDING = "disable"
@@ -56,5 +60,16 @@ object Util {
             }
         }
         return file
+    }
+
+    fun getInitialsLetter(): String {
+        val initials: List<String>? = DeftApp.user.name?.trim()?.replace(" +", " ")?.split(" ")
+        return if (initials != null) {
+            var string = ""
+            for (value in initials)
+                string+=value[0].toString()
+            string
+        } else
+            ""
     }
 }

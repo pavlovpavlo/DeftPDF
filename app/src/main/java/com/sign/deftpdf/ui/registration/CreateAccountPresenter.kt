@@ -39,7 +39,7 @@ class CreateAccountPresenter(basicView: BasicView) : BasePresenter(basicView) {
                                 name
                             )
                         } else {
-                            super.showError("Error connection")
+                            super.showError(t.message.toString())
                         }
                         super.stopLoader()
                     })

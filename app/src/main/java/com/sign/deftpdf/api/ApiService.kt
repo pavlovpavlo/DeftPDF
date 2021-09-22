@@ -2,6 +2,7 @@ package com.sign.deftpdf.api
 
 import com.sign.deftpdf.model.BaseModel
 import com.sign.deftpdf.model.documents.DocumentsModel
+import com.sign.deftpdf.model.faq.FaqModel
 import com.sign.deftpdf.model.user.UserModel
 import com.sign.deftpdf.model.login.AuthModel
 import io.reactivex.Observable
@@ -22,6 +23,10 @@ interface ApiService {
     @Headers("Accept: application/json")
     @GET("user")
     fun getCurrentUser(@Query("api_token") token: String): Observable<UserModel>
+
+    @Headers("Accept: application/json")
+    @GET("faq")
+    fun getFAQ(): Observable<FaqModel>
 
     @Headers("Accept: application/json")
     @POST("password/send-reset-link")
@@ -46,5 +51,19 @@ interface ApiService {
     @Headers("Accept: application/json")
     @POST("user/documents/store")
     fun storeDocument(@Query("api_token") token: String, @Part file: MultipartBody.Part): Observable<BaseModel>
+
+    @Multipart
+    @Headers("Accept: application/json")
+    @POST("user/documents/update/{document_id}")
+    fun updateDocument(@Path(value = "document_id", encoded = true) documentId:String,
+                       @Query("api_token") token: String,
+                       @Part file: MultipartBody.Part?,
+                       @Query("status") status: String?,
+                       @Query("original_name") name: String?): Observable<BaseModel>
+
+    @Headers("Accept: application/json")
+    @POST("user/documents/delete/{document_id}")
+    fun deleteDocument(@Path(value = "document_id", encoded = true) documentId:String,
+                       @Query("api_token") token: String): Observable<BaseModel>
 
 }

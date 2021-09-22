@@ -52,4 +52,10 @@ class UserData {
     @SerializedName("last_confirmation")
     var lastConfirmation: String? = null
 
+    @SerializedName("sign")
+    var sign: UserSign? = null
+
+    @SerializedName("initials")
+    var initials: UserSign? = null
+
 }

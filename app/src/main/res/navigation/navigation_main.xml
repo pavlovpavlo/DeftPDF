@@ -32,7 +32,7 @@
         android:label="fragment_account_settings" />
     <fragment
         android:id="@+id/navigation_help"
-        android:name="com.sign.deftpdf.HelpFragment"
+        android:name="com.sign.deftpdf.ui.help.HelpFragment"
         tools:layout="@layout/fragment_help"
         android:label="fragment_help" />
     <fragment

@@ -8,7 +8,11 @@ class DeftApp : Application() {
 
     companion object {
         lateinit var user : UserData
-        var sortTypeHome = "desc"
+        var sortTypeHome = Util.SORT_DESC
         var filterTypeHome = Util.FILTER_MONTH
+        var sortTypeDocuments= Util.SORT_DESC
+        var filterTypeDocuments = Util.FILTER_MONTH
+        var sortTypeLibrary = Util.SORT_DESC
+        var filterTypeLibrary = Util.FILTER_MONTH
     }
 }

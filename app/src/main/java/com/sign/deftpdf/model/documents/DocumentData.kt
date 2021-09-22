@@ -1,9 +1,10 @@
 package com.sign.deftpdf.model.documents
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 
-class DocumentData {
+class DocumentData : Serializable{
     @SerializedName("id")
     var id = 0
 

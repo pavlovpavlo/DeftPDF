@@ -1,11 +1,13 @@
 package com.sign.deftpdf.ui.main
 
+import android.content.ActivityNotFoundException
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.widget.AppCompatButton
-import androidx.core.net.toFile
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
@@ -19,8 +21,10 @@ import com.sign.deftpdf.R
 import com.sign.deftpdf.base.BaseActivity
 import com.sign.deftpdf.databinding.ActivityMainBinding
 import com.sign.deftpdf.model.BaseModel
+import com.sign.deftpdf.ui.check_auth.CheckAuthActivity
 import com.sign.deftpdf.ui.main.menu.MenuAdapter
 import com.sign.deftpdf.ui.main.menu.Top
+import com.sign.deftpdf.util.LocalSharedUtil
 import com.sign.deftpdf.util.Util
 import okhttp3.MediaType
 import okhttp3.MultipartBody
@@ -30,12 +34,13 @@ import java.util.*
 
 
 class MainActivity : BaseActivity(R.layout.activity_main), StoreDocumentView {
-    private lateinit var mDrawer: DrawerLayout
+
+    lateinit var mDrawer: DrawerLayout
     private lateinit var settingsBtn: AppCompatButton
     private lateinit var navController: NavController
     private val presenter: StoreDocumentPresenter = StoreDocumentPresenter(this)
 
-    private val binding by viewBinding(ActivityMainBinding::bind)
+    internal val binding by viewBinding(ActivityMainBinding::bind)
     private val pickPDF = registerForActivityResult(ActivityResultContracts.GetContent()) { contentUri ->
         loadPdfToServer(contentUri)
     }
@@ -43,7 +48,7 @@ class MainActivity : BaseActivity(R.layout.activity_main), StoreDocumentView {
     var recycler_menu: RecyclerView? = null
     var menuAdapter: MenuAdapter? = null
     val list_menu: ArrayList<Top> =
-        ArrayList<Top>()
+            ArrayList<Top>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,13 +61,20 @@ class MainActivity : BaseActivity(R.layout.activity_main), StoreDocumentView {
         initListeners()
     }
 
-    private fun initMenu(){
+    private fun initMenu() {
         mDrawer = findViewById(R.id.drawer_layout)
         settingsBtn = findViewById(R.id.btn_setting)
         recycler_menu = findViewById(R.id.r_menu)
+        val signOut = findViewById<AppCompatButton>(R.id.sign_out)
+        val userInitialsImage = findViewById<TextView>(R.id.user_initials)
+        val userInitials = findViewById<TextView>(R.id.user_initials_text)
+
+        userInitials.text = DeftApp.user.name
+        userInitialsImage.text = Util.getInitialsLetter().toUpperCase(Locale.getDefault())
+
         recycler_menu!!.layoutManager = GridLayoutManager(this, 1)
         menuAdapter = MenuAdapter(
-                list_menu as ArrayList<Top?>?,
+                list_menu as ArrayList<Top>?,
                 this
         )
         recycler_menu!!.adapter = menuAdapter
@@ -91,17 +103,20 @@ class MainActivity : BaseActivity(R.layout.activity_main), StoreDocumentView {
                 list_menu as ArrayList<Top?>?,
                 this
         )
+        signOut.setOnClickListener {
+            LocalSharedUtil().setTokenParameter("", this)
+            startActivity(Intent(this, CheckAuthActivity::class.java))
+            this.finishAffinity()
+        }
         recycler_menu!!.adapter = menuAdapter
         menuAdapter!!.notifyDataSetChanged()
     }
 
-    private fun initListeners(){
-        with(binding){
-            burgerBtn.setOnClickListener {mDrawer.open() }
-            addDocument.setOnClickListener {pickPDF.launch(Util.MIMETYPE_PDF)}
-            sortMenu.setOnClickListener {mDrawer.open() }
-            filterMenu.setOnClickListener {mDrawer.open() }
-            notificationMenu.setOnClickListener {navController.navigate(R.id.navigation_notification) }
+
+
+    private fun initListeners() {
+        with(binding) {
+            addDocument.setOnClickListener { pickPDF.launch(Util.MIMETYPE_PDF) }
         }
         settingsBtn.setOnClickListener {
             mDrawer.closeDrawers()
@@ -109,9 +124,9 @@ class MainActivity : BaseActivity(R.layout.activity_main), StoreDocumentView {
         }
     }
 
-    private fun loadPdfToServer(uri: Uri){
+    private fun loadPdfToServer(uri: Uri) {
         presenter.attachView(this)
-        val file :File = Util.getFile(this, uri)
+        val file: File = Util.getFile(this, uri)
 
         val requestFile = RequestBody.create(MediaType.parse("file"), file)
 
@@ -120,32 +135,40 @@ class MainActivity : BaseActivity(R.layout.activity_main), StoreDocumentView {
     }
 
     private val onResultItemClick: MenuAdapter.ClickListener =
-        object : MenuAdapter.ClickListener {
-            override fun onItemClick(position: Int, v: View?) {
-                if (mDrawer.isDrawerOpen(GravityCompat.START)) {
-                    mDrawer.closeDrawers()
+            object : MenuAdapter.ClickListener {
+                override fun onItemClick(position: Int, v: View?) {
+                    if (mDrawer.isDrawerOpen(GravityCompat.START)) {
+                        mDrawer.closeDrawers()
+                    }
+                    when (position) {
+                        0 -> {
+                            navController.navigate(R.id.navigation_account_setting)
+                        }
+                        1 -> {
+                            try {
+                                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$packageName")))
+                            } catch (e: ActivityNotFoundException) {
+                                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=$packageName")))
+                            }
+                        }
+                        2 -> {
+                            navController.navigate(R.id.navigation_help)
+                        }
+                        3 -> {
+                            val intent = Intent(Intent.ACTION_SENDTO)
+                            intent.data = Uri.parse("mailto:")
+                            intent.putExtra(Intent.EXTRA_EMAIL, DeftApp.user.email)
+                            if (intent.resolveActivity(packageManager) != null) {
+                                startActivity(intent)
+                            }
+                        }
+                    }
                 }
-                when(position){
-                    0 -> {
 
-                    }
-                    1 -> {
-
-                    }
-                    2 -> {
-                        navController.navigate(R.id.navigation_help)
-                    }
-                    3 -> {
-
-                    }
-                }
+                override fun onItemLongClick(position: Int, v: View?) {}
             }
-
-            override fun onItemLongClick(position: Int, v: View?) {}
-        }
 
     override fun storeDocumentSuccess(data: BaseModel) {
 
     }
-
 }

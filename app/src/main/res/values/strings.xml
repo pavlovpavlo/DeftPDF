@@ -64,4 +64,20 @@
     <string name="add_an_initial">+ Add an Initial</string>
     <string name="no_internet">Slow or no internet connection.<br/>Please check your internet settings</string>
     <string name="try_again">Try Again</string>
+    <string name="filter_by">Filter by</string>
+    <string name="rename_file">Rename file</string>
+    <string name="file_name">File name</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete_sure">Are you sure you want to delete</string>
+    <string name="delete_file">Delete file</string>
+    <string name="latest_first">Latest first</string>
+    <string name="oldest_first">Oldest first</string>
+    <string name="reset">Reset</string>
+    <string name="this_week_only">This week only</string>
+    <string name="this_month_only">This month only</string>
+    <string name="delete_initials">Delete initials</string>
+    <string name="delete_initials_sure">Are you sure you want to delete initials?</string>
+    <string name="delete_signature">Delete signature</string>
+    <string name="delete_signature_sure">Are you sure you want to delete signature?</string>
 </resources>

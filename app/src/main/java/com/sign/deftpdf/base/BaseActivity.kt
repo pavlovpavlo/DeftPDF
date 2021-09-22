@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.sign.deftpdf.R
+import com.sign.deftpdf.model.documents.DocumentData
 import com.sign.deftpdf.ui.main.MainActivity
 import com.sign.deftpdf.ui.login.LoginActivity
 import com.sign.deftpdf.ui.registration.CreateAccountActivity
@@ -58,6 +59,10 @@ open class BaseActivity(contentLayoutId: Int) : AppCompatActivity(contentLayoutI
 
     fun openCreateAccount() {
         startActivity(Intent(this, CreateAccountActivity::class.java))
+    }
+
+    fun openDocumentShow(data: DocumentData){
+
     }
 
 }

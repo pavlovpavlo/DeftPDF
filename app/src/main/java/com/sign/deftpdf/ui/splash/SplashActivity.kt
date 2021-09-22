@@ -32,10 +32,12 @@ class SplashActivity : BaseActivity(R.layout.activity_splash), GetUserView {
 
     private fun openScreenCheck() {
         startActivity(Intent(this, CheckAuthActivity::class.java))
+        finish()
     }
 
     private fun openScreenMain() {
         startActivity(Intent(this, MainActivity::class.java))
+        finish()
     }
 
     override fun getUserSuccess(data: UserModel) {

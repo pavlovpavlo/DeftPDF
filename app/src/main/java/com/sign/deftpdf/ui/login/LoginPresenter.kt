@@ -38,7 +38,7 @@ class LoginPresenter(basicView: BasicView) : BasePresenter(basicView) {
                                 password
                             )
                         } else {
-                            super.showError("Error connection")
+                            super.showError(t.message.toString())
                         }
                         super.stopLoader()
                     })

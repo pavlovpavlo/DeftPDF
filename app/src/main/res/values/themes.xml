@@ -37,5 +37,16 @@
         <item name="background">@android:color/transparent</item>
     </style>
 
+    <style name="popup_window_animation_phone" parent="android:Animation">
+
+        <item name="android:windowEnterAnimation">@anim/slid_up</item>
+        <item name="android:windowExitAnimation">@anim/slide_doun</item>
+
+    </style>
+
+    <style name="RadioButtonTheme" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/gray_d9</item>
+        <item name="colorControlActivated">@color/main</item>
+    </style>
 
 </resources>
