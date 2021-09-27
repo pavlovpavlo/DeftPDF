@@ -201,6 +201,12 @@ class MainActivity : BaseActivity(R.layout.activity_main), StoreDocumentView {
                 override fun onItemLongClick(position: Int, v: View?) {}
             }
 
+    override fun onRestart() {
+        super.onRestart()
+        navController.currentDestination?.id?.let {
+            navController.navigate(it)
+        }
+    }
     override fun storeDocumentSuccess(data: BaseModel) {
         when (navController.currentDestination?.id) {
             R.id.navigation_documents -> {

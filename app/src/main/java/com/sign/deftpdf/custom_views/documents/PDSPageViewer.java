@@ -630,7 +630,7 @@ public class PDSPageViewer extends FrameLayout implements Observer {
     public PDSElement createElement(PDSElement.PDSElementType fASElementType, Bitmap bitmap, float f, float f2, float f3, float f4) {
         PDSElement fASElement = new PDSElement(fASElementType, bitmap);
         //fASElement.setContent(fASElementContent);
-        fASElement.setRect(mapRectToPDFCoordinates(new RectF(f, f2, f + f3, f2 + f4)));
+        fASElement.setRect(mapRectToPDFCoordinates(new RectF(f, f2, f3, f2 + f4)));
         PDSElementViewer addElement = addElement(fASElement);
         addElement.getElementView().requestFocus();
         return fASElement;

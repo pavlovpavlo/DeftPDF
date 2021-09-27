@@ -15,6 +15,7 @@ import com.sign.deftpdf.databinding.ActivityLoginWebViewBinding
 import com.sign.deftpdf.model.user.UserModel
 import com.sign.deftpdf.ui.main.GetUserPresenter
 import com.sign.deftpdf.ui.main.GetUserView
+import com.sign.deftpdf.util.LocalSharedUtil
 import java.io.StringReader
 
 
@@ -58,8 +59,10 @@ class LoginWebViewActivity : BaseActivity(R.layout.activity_login_web_view), Get
                             //val reader = JsonReader(StringReader(s))
                             val token = s.replace("\"", "")
 
-                            if (token != "null")
-                                presenterUser.sendResponse(token)
+                            if (token != "null") {
+                                    LocalSharedUtil().setTokenParameter(token, this@LoginWebViewActivity)
+                                    presenterUser.sendResponse(token)
+                                }
                             else
                                 showError("Auth error, token not correct")
                         })

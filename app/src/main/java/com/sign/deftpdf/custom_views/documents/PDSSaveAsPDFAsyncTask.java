@@ -59,7 +59,8 @@ public class PDSSaveAsPDFAsyncTask extends AsyncTask<Void, Void, Boolean> {
         if (!root.exists()) {
             root.mkdirs();
         }
-        File file = new File(root, "test.pdf");
+        String fileName = mfileName.replace(".pdf", "") + ".pdf";
+        File file = new File(root, fileName);
 
         if (file.exists())
             file.delete();

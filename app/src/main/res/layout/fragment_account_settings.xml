@@ -228,7 +228,7 @@
             android:layout_marginEnd="15dp"
             android:layout_marginStart="15dp"
             android:layout_marginTop="15dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="30dp"
             app:cardCornerRadius="7dp"
             app:cardElevation="2dp"
             android:layout_height="150dp">
@@ -270,14 +270,7 @@
                     android:id="@+id/init_image"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>
-                <ImageView
-                    android:id="@+id/init_delete"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_margin="10dp"
-                    android:src="@drawable/ic_document_delete"/>
+
 
                 <ImageView
                     android:id="@+id/init_update"
@@ -287,6 +280,15 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_margin="10dp"
                     android:src="@drawable/ic_pen_edit"/>
+
+                <ImageView
+                    android:id="@+id/init_delete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/ic_document_delete"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>

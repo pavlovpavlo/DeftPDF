@@ -147,10 +147,10 @@ class AccountSettingFragment : Fragment(R.layout.fragment_account_settings), Get
                         }
                         startActivity(Intent(requireContext(), DrawActivity::class.java))
 
-                        initDelete.setOnClickListener {
-                            initials?.id?.let {
-                                deleteDocument(it, "initials")
-                            }
+                    }
+                    initDelete.setOnClickListener {
+                        initials?.id?.let {
+                            deleteDocument(it, "initials")
                         }
                     }
                 }

@@ -14,7 +14,7 @@
     <dimen name="sign_field_step_size">2.0dip</dimen>
     <dimen name="sign_field_min_height">24.0dip</dimen>
     <dimen name="sign_field_max_height">170.0dip</dimen>
-    <dimen name="sign_field_default_height">60.0dip</dimen>
+    <dimen name="sign_field_default_height">30.0dip</dimen>
     <dimen name="menu_offset_y">40.0dip</dimen>
     <dimen name="menu_offset_x">10.0dip</dimen>
     <dimen name="ctx_menu_item_width">35.0dip</dimen>

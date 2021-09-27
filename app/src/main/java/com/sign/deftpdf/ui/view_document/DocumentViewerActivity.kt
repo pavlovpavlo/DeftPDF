@@ -147,6 +147,15 @@ class DocumentViewerActivity : BaseActivity(R.layout.activity_document_viewer), 
         val updatePresenter = DocumentsUpdatePresenter(this)
         updatePresenter.attachView(object : BaseModelView {
             override fun requestSuccess(data: BaseModel) {
+                val file = File(getExternalFilesDir(null)?.absolutePath, "pdfsdcard_location")
+                if (!file.exists()) {
+                    file.mkdir()
+                }
+                val fileName: String = this@DocumentViewerActivity.data.originalName?.replace(".pdf", "") + ".pdf"
+                val pdfFile = File(file, fileName)
+                if (pdfFile.exists())
+                pdfFile.delete()
+
                 finish()
             }
         })
@@ -274,17 +283,17 @@ class DocumentViewerActivity : BaseActivity(R.layout.activity_document_viewer), 
         val view: View = baseSettingsDialog(R.layout.dialog_save)
         val signMe: LinearLayout = view.findViewById(R.id.sign_me)
         val signNotMe: LinearLayout = view.findViewById(R.id.sign_not_me)
-
+        val fileName: String = this@DocumentViewerActivity.data.originalName?.replace(".pdf", "") + ".pdf"
         signMe.setOnClickListener {
             status = "signed"
-            val task = PDSSaveAsPDFAsyncTask(this, "test.pdf")
+            val task = PDSSaveAsPDFAsyncTask(this, fileName)
             task.execute(*arrayOfNulls<Void>(0))
             popup.dismiss()
 
         }
         signNotMe.setOnClickListener {
             status = "draft"
-            val task = PDSSaveAsPDFAsyncTask(this, "test.pdf")
+            val task = PDSSaveAsPDFAsyncTask(this, fileName)
             task.execute(*arrayOfNulls<Void>(0))
             popup.dismiss()
         }
@@ -450,7 +459,8 @@ class DocumentViewerActivity : BaseActivity(R.layout.activity_document_viewer), 
         if (!file.exists()) {
             file.mkdir()
         }
-        val pdfFile = File(file, "test.pdf")
+        val fileName: String = data.originalName?.replace(".pdf", "") + ".pdf"
+        val pdfFile = File(file, fileName)
 
         val requestFile = RequestBody.create(MediaType.parse("file"), pdfFile)
 
