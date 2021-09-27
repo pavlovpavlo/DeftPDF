@@ -4,6 +4,7 @@ import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -82,17 +83,22 @@ class MainActivity : BaseActivity(R.layout.activity_main), StoreDocumentView {
 
         NavigationUI.setupWithNavController(binding.appTablayout, navController)
 
-
         initMenu()
         initListeners()
+        Log.d("Load-Start-Activity","Load")
     }
 
     override fun startLoader() {
-        //findViewById<View>(R.id.progress_main).visibility = View.VISIBLE
+        Log.d("Load-Start","Load")
+        try{
+        findViewById<View>(R.id.progress_main).visibility = View.VISIBLE}catch (e:Exception){
+            //not cast
+        }
     }
 
     override fun stopLoader() {
-        //findViewById<View>(R.id.progress_main).visibility = View.GONE
+        Log.d("Load-Stop","Load")
+        findViewById<View>(R.id.progress_main).visibility = View.GONE
     }
 
     private fun initMenu() {
