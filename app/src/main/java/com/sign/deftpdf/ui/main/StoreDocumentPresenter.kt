@@ -24,6 +24,7 @@ class StoreDocumentPresenter(basicView: BasicView) : BasePresenter(basicView) {
     }
 
     fun sendResponse(token: String, file: MultipartBody.Part) {
+        super.startLoader()
         val compositeDisposable = CompositeDisposable()
 
         compositeDisposable.add(

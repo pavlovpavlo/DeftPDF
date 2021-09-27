@@ -24,6 +24,7 @@ class SignatureUpdatePresenter(basicView: BasicView) : BasePresenter(basicView) 
     fun sendResponse(token: String, documentId: String,
                      image: MultipartBody.Part?, type: String,
                      signSignature: String?) {
+        super.startLoader()
         val compositeDisposable = CompositeDisposable()
         compositeDisposable.add(
                 apiService.updateSignature(documentId, token, image, type, signSignature)

@@ -20,6 +20,7 @@ class RequestSignatureEmailPresenter(basicView: BasicView) : BasePresenter(basic
     }
 
     fun sendResponse(token: String, documentId: String, email: String, name: String, note: String) {
+        super.startLoader()
         val compositeDisposable = CompositeDisposable()
         compositeDisposable.add(
                 apiService.sendSignEmail(documentId,token, email, name, note)

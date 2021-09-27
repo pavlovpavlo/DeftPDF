@@ -1,8 +1,11 @@
 package com.sign.deftpdf.base
 
 import android.content.Intent
+import android.os.Bundle
 import android.os.CountDownTimer
+import android.os.PersistableBundle
 import android.view.View
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.sign.deftpdf.R
@@ -16,7 +19,7 @@ import com.sign.deftpdf.util.NoInternetConnectionUtil
 open class BaseActivity(contentLayoutId: Int) : AppCompatActivity(contentLayoutId), BasicView {
 
     private var ERROR_TIME_SECOND = 4L
-
+    lateinit var progressBar: ProgressBar;
 
     override fun showError(message: String) {
         val countDownTimer: CountDownTimer
@@ -49,7 +52,6 @@ open class BaseActivity(contentLayoutId: Int) : AppCompatActivity(contentLayoutI
     override fun stopLoader() {
 
     }
-
 
     fun openMain() {
         startActivity(Intent(this, MainActivity::class.java))

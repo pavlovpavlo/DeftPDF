@@ -19,6 +19,7 @@ class LoginPresenter(basicView: BasicView) : BasePresenter(basicView) {
     }
 
     fun sendResponse(email: String, password: String) {
+        super.startLoader()
         val compositeDisposable = CompositeDisposable()
         compositeDisposable.add(
             apiService.login(email, password)

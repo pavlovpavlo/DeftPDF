@@ -128,7 +128,7 @@ interface ApiService {
         @Query("api_token") token: String,
         @Part image: MultipartBody.Part?,
         @Query("type") type: String,
-        @Query("sign_signature") signSignature: String?
+        @Query("string_signature") signSignature: String?
     ): Observable<UserModel>
 
     @FormUrlEncoded
@@ -139,7 +139,7 @@ interface ApiService {
         @Query("api_token") token: String,
         @Part image: MultipartBody.Part?,
         @Query("type") type: String,
-        @Query("sign_signature") signSignature: String?
+        @Query("string_signature") signSignature: String?
     ): Observable<UserModel>
 
     @Headers("Accept: application/json")

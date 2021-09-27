@@ -2,6 +2,7 @@ package com.sign.deftpdf.ui.forgot
 
 import android.os.Bundle
 import android.util.Patterns
+import android.view.View
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.sign.deftpdf.R
 import com.sign.deftpdf.base.BaseActivity
@@ -19,6 +20,14 @@ class ForgotPassActivity : BaseActivity(R.layout.activity_forgot_pass), ForgotPa
         presenter.attachView(this)
 
         initListeners()
+    }
+
+    override fun startLoader() {
+        findViewById<View>(R.id.progress_bar).visibility = View.VISIBLE
+    }
+
+    override fun stopLoader() {
+        findViewById<View>(R.id.progress_bar).visibility = View.GONE
     }
 
     private fun initListeners() {

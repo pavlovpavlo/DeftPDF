@@ -20,6 +20,7 @@ class RequestSignatureLinkPresenter(basicView: BasicView) : BasePresenter(basicV
     }
 
     fun sendResponse(token: String, documentId: String, email: String, name: String) {
+        super.startLoader()
         val compositeDisposable = CompositeDisposable()
         compositeDisposable.add(
                 apiService.createSignLink(documentId,token, email, name)

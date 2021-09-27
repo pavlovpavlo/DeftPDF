@@ -112,6 +112,14 @@ class DocumentViewerActivity : BaseActivity(R.layout.activity_document_viewer), 
     )
     private lateinit var popup: PopupWindow
 
+    override fun startLoader() {
+        findViewById<View>(R.id.progress_bar).visibility = View.VISIBLE
+    }
+
+    override fun stopLoader() {
+        findViewById<View>(R.id.progress_bar).visibility = View.GONE
+    }
+
     fun baseSettingsDialog(layout: Int): View {
         val inflater = getSystemService(AppCompatActivity.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view: View = inflater.inflate(layout, null)

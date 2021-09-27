@@ -19,6 +19,7 @@ class CreateAccountPresenter(basicView: BasicView) : BasePresenter(basicView) {
     }
 
     fun sendResponse(email: String, password: String, name: String) {
+        super.startLoader()
         val compositeDisposable = CompositeDisposable()
         compositeDisposable.add(
             apiService.registration(email, password, name)

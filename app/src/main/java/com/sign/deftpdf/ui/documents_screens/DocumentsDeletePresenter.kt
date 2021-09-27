@@ -20,6 +20,7 @@ class DocumentsDeletePresenter(basicView: BasicView) : BasePresenter(basicView) 
     }
 
     fun sendResponse(token: String, documentId: String) {
+        super.startLoader()
         val compositeDisposable = CompositeDisposable()
         compositeDisposable.add(
                 apiService.deleteDocument(documentId,token)

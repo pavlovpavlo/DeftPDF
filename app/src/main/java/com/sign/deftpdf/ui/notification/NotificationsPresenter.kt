@@ -19,6 +19,7 @@ class NotificationsPresenter(basicView: BasicView) : BasePresenter(basicView) {
     }
 
     fun sendResponse(token: String) {
+        super.startLoader()
         val compositeDisposable = CompositeDisposable()
         compositeDisposable.add(
             apiService.getNotifications(token)

@@ -20,6 +20,7 @@ class HelpPresenter(basicView: BasicView) : BasePresenter(basicView) {
     }
 
     fun sendResponse() {
+        super.startLoader()
         val compositeDisposable = CompositeDisposable()
         compositeDisposable.add(
                 apiService.getFAQ()

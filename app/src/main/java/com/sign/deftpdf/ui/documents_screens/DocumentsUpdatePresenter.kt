@@ -23,6 +23,7 @@ class DocumentsUpdatePresenter(basicView: BasicView) : BasePresenter(basicView) 
     fun sendResponse(token: String, documentId: String,
                      file: MultipartBody.Part?, status: String?,
                      name: String?) {
+        super.startLoader()
         val compositeDisposable = CompositeDisposable()
         compositeDisposable.add(
                 apiService.updateDocument(documentId, token, file, status, name)

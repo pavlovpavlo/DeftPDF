@@ -19,6 +19,7 @@ class ChangePasswordPresenter(basicView: BasicView) : BasePresenter(basicView) {
     }
 
     fun sendResponse(token: String, password: String) {
+        super.startLoader()
         val compositeDisposable = CompositeDisposable()
         compositeDisposable.add(
             apiService.changePassword(token, password)

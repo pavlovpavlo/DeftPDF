@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.widget.AppCompatButton
@@ -84,6 +85,14 @@ class MainActivity : BaseActivity(R.layout.activity_main), StoreDocumentView {
 
         initMenu()
         initListeners()
+    }
+
+    override fun startLoader() {
+        findViewById<View>(R.id.progress_main).visibility = View.VISIBLE
+    }
+
+    override fun stopLoader() {
+        findViewById<View>(R.id.progress_main).visibility = View.GONE
     }
 
     private fun initMenu() {

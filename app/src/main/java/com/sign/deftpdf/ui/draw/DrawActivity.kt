@@ -68,6 +68,14 @@ class DrawActivity : BaseActivity(R.layout.activity_draw) {
         isSign = true
     }
 
+    override fun startLoader() {
+        findViewById<View>(R.id.progress_bar).visibility = View.VISIBLE
+    }
+
+    override fun stopLoader() {
+        findViewById<View>(R.id.progress_bar).visibility = View.GONE
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

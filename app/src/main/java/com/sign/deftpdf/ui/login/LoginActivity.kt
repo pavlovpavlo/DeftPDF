@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.util.Patterns.EMAIL_ADDRESS
+import android.view.View
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.sign.deftpdf.DeftApp
 import com.sign.deftpdf.ui.forgot.ForgotPassActivity
@@ -29,6 +30,14 @@ class LoginActivity : BaseActivity(R.layout.activity_login), LoginView, GetUserV
         presenter.attachView(this)
         presenterUser.attachView(this)
         initListeners()
+    }
+
+    override fun startLoader() {
+        findViewById<View>(R.id.progress_bar).visibility = View.VISIBLE
+    }
+
+    override fun stopLoader() {
+        findViewById<View>(R.id.progress_bar).visibility = View.GONE
     }
 
     private fun initListeners() {

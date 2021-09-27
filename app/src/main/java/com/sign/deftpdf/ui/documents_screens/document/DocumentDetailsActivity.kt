@@ -42,6 +42,14 @@ class DocumentDetailsActivity : BaseActivity(R.layout.activity_document_details)
         presenter.sendResponse(DeftApp.user.apiToken.toString(), data.id.toString())
     }
 
+    override fun startLoader() {
+        findViewById<View>(R.id.progress_bar).visibility = View.VISIBLE
+    }
+
+    override fun stopLoader() {
+        findViewById<View>(R.id.progress_bar).visibility = View.GONE
+    }
+
     private fun initListeners(){
         with(binding){
             emailSend.setOnClickListener {

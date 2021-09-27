@@ -20,6 +20,7 @@ class GetDocumentPresenter(basicView: BasicView) : BasePresenter(basicView) {
     }
 
     fun sendResponse(token: String, documentId: String) {
+        super.startLoader()
         val compositeDisposable = CompositeDisposable()
         compositeDisposable.add(
                 apiService.getDocument(documentId,token)

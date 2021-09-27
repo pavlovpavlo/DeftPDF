@@ -22,6 +22,7 @@ class DocumentsPresenter(basicView: BasicView) : BasePresenter(basicView) {
                      perPage: String, sortBy: String,
                      sortType: String, fromDate: String,
                      toDate: String, status: String?) {
+        super.startLoader()
         val compositeDisposable = CompositeDisposable()
         compositeDisposable.add(
                 apiService.getDocuments(token, page, perPage, sortBy, sortType, fromDate, toDate, status)

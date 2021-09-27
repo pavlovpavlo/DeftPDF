@@ -19,6 +19,7 @@ class ForgotPassPresenter(basicView: BasicView) : BasePresenter(basicView) {
     }
 
     fun sendResponse(email: String) {
+        super.startLoader()
         val compositeDisposable = CompositeDisposable()
         compositeDisposable.add(
             apiService.forgotPassword(email)
