@@ -12,7 +12,6 @@ import android.widget.LinearLayout
 import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.core.app.ShareCompat
-import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,7 +22,7 @@ import com.sign.deftpdf.base.BaseFragment
 import com.sign.deftpdf.base.BaseModelView
 import com.sign.deftpdf.databinding.FragmentDocumentBinding
 import com.sign.deftpdf.model.BaseModel
-import com.sign.deftpdf.model.documents.DocumentData
+import com.sign.deftpdf.model.documents.DocumentsData
 import com.sign.deftpdf.model.documents.DocumentsModel
 import com.sign.deftpdf.ui.documents_screens.*
 import com.sign.deftpdf.ui.documents_screens.delete.DeleteDocumentDialog
@@ -47,7 +46,7 @@ class DocumentsFragment : BaseFragment(R.layout.fragment_document) , DocumentsVi
     private var documentsStatus: String? = null
     private lateinit var lastActiveTabs: TextView
     private lateinit var documentModel: DocumentsModel
-    private var list: MutableList<DocumentData> = listOf<DocumentData>().toMutableList()
+    private var list: MutableList<DocumentsData> = listOf<DocumentsData>().toMutableList()
     private var adapter: DocumentsAdapter = DocumentsAdapter(listOf())
     private val currentDate: String =
             SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(
@@ -72,6 +71,7 @@ class DocumentsFragment : BaseFragment(R.layout.fragment_document) , DocumentsVi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initListeners()
+
     }
 
     private fun sendRequest() {
@@ -82,7 +82,7 @@ class DocumentsFragment : BaseFragment(R.layout.fragment_document) , DocumentsVi
     }
 
     private fun showDetailDialog(position: Int) {
-        val data: DocumentData = list[position]
+        val data: DocumentsData = list[position]
         val view: View = showDocumentDetailPopup()
 
         val documentName: TextView = view.findViewById(R.id.document_name)
@@ -327,7 +327,7 @@ class DocumentsFragment : BaseFragment(R.layout.fragment_document) , DocumentsVi
     }
 
     private fun filter(text: String) {
-        val newList = mutableListOf<DocumentData>()
+        val newList = mutableListOf<DocumentsData>()
         for (item in list) {
             item.originalName?.let {
                 if (it.toLowerCase().contains(text.toLowerCase())) {

@@ -85,10 +85,10 @@
                 android:textSize="12sp" />
 
             <TextView
+                android:id="@+id/text_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_reg"
-                android:text="Document_Name"
                 android:textColor="@color/gray_87"
                 android:layout_marginTop="5dp"
                 android:layout_marginStart="15dp"
@@ -107,10 +107,10 @@
                 android:textSize="12sp" />
 
             <TextView
+                android:id="@+id/text_type"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_reg"
-                android:text="Signed"
                 android:textColor="@color/gray_87"
                 android:layout_marginTop="5dp"
                 android:layout_marginStart="15dp"
@@ -129,10 +129,10 @@
                 android:textSize="12sp" />
 
             <TextView
+                android:id="@+id/text_size"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_reg"
-                android:text="1.54 MB"
                 android:textColor="@color/gray_87"
                 android:layout_marginTop="5dp"
                 android:layout_marginStart="15dp"
@@ -148,6 +148,7 @@
 
 
             <TextView
+                android:id="@+id/activity_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_reg"
@@ -165,8 +166,6 @@
                 android:paddingStart="15dp"
                 android:layout_marginTop="10dp"
                 android:id="@+id/users">
-                <include layout="@layout/item_user"/>
-                <include layout="@layout/item_user"/>
             </LinearLayout>
 
             <View
@@ -176,6 +175,8 @@
                 android:background="@color/gray_f0"/>
 
             <LinearLayout
+                android:id="@+id/email_send"
+                android:clickable="true"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:gravity="center_vertical"
@@ -199,6 +200,8 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/export_send"
+                android:clickable="true"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:gravity="center_vertical"
@@ -227,6 +230,8 @@
                 android:background="@color/gray_f0"/>
 
             <LinearLayout
+                android:id="@+id/rename"
+                android:clickable="true"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:gravity="center_vertical"
@@ -250,6 +255,8 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/delete"
+                android:clickable="true"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:gravity="center_vertical"

@@ -1,13 +1,13 @@
-package com.benzveen.pdfdigitalsignature.utils;
+package com.sign.deftpdf.util;
 
 import android.content.Context;
 import android.graphics.Matrix;
 import android.graphics.RectF;
 import android.widget.ImageView;
 
-import com.benzveen.pdfdigitalsignature.PDSModel.PDSElement;
-import com.benzveen.pdfdigitalsignature.Signature.SignatureUtils;
-import com.benzveen.pdfdigitalsignature.Signature.SignatureView;
+import com.sign.deftpdf.custom_views.documents.PDSElement;
+import com.sign.deftpdf.custom_views.signature.SignatureUtils;
+import com.sign.deftpdf.custom_views.signature.SignatureView;
 
 public class ViewUtils {
 

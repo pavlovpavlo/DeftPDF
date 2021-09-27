@@ -13,4 +13,7 @@
     <color name="gray_87">#878787</color>
 
     <color name="transparent">#00FFFFFF</color>
+    <color name="draw_red">#EE4242</color>
+    <color name="draw_black">#323232</color>
+    <color name="gray_75">#757575</color>
 </resources>

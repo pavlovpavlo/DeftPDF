@@ -86,56 +86,22 @@
         android:textColor="@color/main"
         android:textSize="14sp" />
 
-    <TextView
-        android:id="@+id/title_name_link"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:fontFamily="@font/roboto_reg"
-        android:text="@string/recepients_name"
-        android:textColor="@color/black"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@id/content_start"
-        app:layout_constraintTop_toBottomOf="@id/filter_flow" />
-
-    <EditText
-        android:id="@+id/name_edittext_link"
-        android:layout_width="0dp"
-        android:layout_height="38dp"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/ic_edittext_bg"
-        android:fontFamily="@font/roboto_reg"
-        android:inputType="text"
-        android:maxLines="1"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
-        android:textColor="#878787"
-        android:textCursorDrawable="@null"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@id/content_end"
-        app:layout_constraintStart_toStartOf="@id/content_start"
-        app:layout_constraintTop_toBottomOf="@id/title_name_link" />
-
-    <TextView
+    <View
         android:id="@+id/title_link"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="1dp"
         android:layout_marginTop="15dp"
-        android:fontFamily="@font/roboto_reg"
-        android:text="@string/link"
-        android:textColor="@color/black"
-        android:textSize="12sp"
+        android:background="@color/gray_f0"
         app:layout_constraintStart_toStartOf="@id/content_start"
-        app:layout_constraintTop_toBottomOf="@id/name_edittext_link" />
+        app:layout_constraintTop_toBottomOf="@id/email_edittext" />
 
-    <EditText
+    <TextView
         android:id="@+id/link_edittext"
         android:layout_width="0dp"
-        android:layout_height="38dp"
-        android:layout_marginTop="5dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="15dp"
         android:background="@drawable/ic_edittext_bg"
         android:fontFamily="@font/roboto_reg"
-        android:inputType="textEmailAddress"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
         android:textColor="#878787"
@@ -145,13 +111,16 @@
         app:layout_constraintStart_toStartOf="@id/content_start"
         app:layout_constraintTop_toBottomOf="@id/title_link" />
 
-    <ImageView
+    <TextView
         android:id="@+id/copy_link"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_copy_link"
+        android:textSize="14sp"
+        android:fontFamily="@font/roboto_reg"
+        android:textColor="@color/gray_87"
+        android:text="@string/generate_link_here"
         app:layout_constraintEnd_toEndOf="@id/link_edittext"
-        android:layout_marginEnd="10dp"
+        app:layout_constraintStart_toStartOf="@id/link_edittext"
         app:layout_constraintBottom_toBottomOf="@id/link_edittext"
         app:layout_constraintTop_toTopOf="@id/link_edittext"/>
 
@@ -245,6 +214,15 @@
         app:layout_constraintTop_toBottomOf="@id/title_note" />
 
     <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_link"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:constraint_referenced_ids="title_email
+        , email_edittext,title_name, name_edittext, title_link
+        , link_edittext, copy_link" />
+
+    <androidx.constraintlayout.widget.Group
         android:id="@+id/group_email"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -252,13 +230,7 @@
         app:constraint_referenced_ids="title_name, name_edittext, title_email
         , email_edittext, title_note, note_edittext" />
 
-    <androidx.constraintlayout.widget.Group
-        android:id="@+id/group_link"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:visibility="gone"
-        app:constraint_referenced_ids="title_name_link, name_edittext_link, title_link
-        , link_edittext, copy_link" />
+
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/send_request"

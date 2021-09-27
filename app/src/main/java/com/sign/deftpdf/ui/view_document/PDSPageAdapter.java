@@ -1,10 +1,11 @@
-package com.benzveen.pdfdigitalsignature.imageviewer;
+package com.sign.deftpdf.ui.view_document;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
-import com.benzveen.pdfdigitalsignature.Document.PDSFragment;
-import com.benzveen.pdfdigitalsignature.PDF.PDSPDFDocument;
+
+import com.sign.deftpdf.custom_views.documents.PDSFragment;
+import com.sign.deftpdf.custom_views.documents.PDSPDFDocument;
 
 public class PDSPageAdapter extends FragmentStatePagerAdapter {
 

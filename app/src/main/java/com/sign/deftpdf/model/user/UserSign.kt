@@ -15,6 +15,9 @@ class UserSign {
     @SerializedName("url")
     var url: String? = null
 
+    @SerializedName("string_signature")
+    var stringSignature: String? = null
+
     @SerializedName("created_at")
     var createdAt: String? = null
 

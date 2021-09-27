@@ -37,6 +37,8 @@
     <string name="request_signature">Request Signature</string>
     <string name="link">Link</string>
     <string name="send_request">Send Request</string>
+    <string name="get_link">Get Link</string>
+    <string name="copy_link">Copy Link</string>
     <string name="recepients_name">Recepient’s Name</string>
     <string name="add_a_note">Add a Note</string>
     <string name="details_and_activity">Details and Activity</string>
@@ -62,7 +64,7 @@
     <string name="initials">Initials</string>
     <string name="you_don_t_have_any_initial">You don’t have any initial</string>
     <string name="add_an_initial">+ Add an Initial</string>
-    <string name="no_internet">Slow or no internet connection.<br/>Please check your internet settings</string>
+    <string name="no_internet">Slow or no internet connection.<br />Please check your internet settings</string>
     <string name="try_again">Try Again</string>
     <string name="filter_by">Filter by</string>
     <string name="rename_file">Rename file</string>
@@ -80,4 +82,7 @@
     <string name="delete_initials_sure">Are you sure you want to delete initials?</string>
     <string name="delete_signature">Delete signature</string>
     <string name="delete_signature_sure">Are you sure you want to delete signature?</string>
+    <string name="draw_your_signature_here">Draw your signature here</string>
+    <string name="save">Save</string>
+    <string name="generate_link_here">Generate link here</string>
 </resources>

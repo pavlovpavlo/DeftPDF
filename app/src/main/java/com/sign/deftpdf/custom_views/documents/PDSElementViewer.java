@@ -1,4 +1,4 @@
-package com.benzveen.pdfdigitalsignature.Document;
+package com.sign.deftpdf.custom_views.documents;
 
 import android.content.ClipData;
 import android.content.Context;
@@ -6,32 +6,29 @@ import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.RectF;
 import android.graphics.drawable.GradientDrawable;
-
-import androidx.core.view.ViewCompat;
-
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-import com.benzveen.pdfdigitalsignature.PDSModel.PDSElement;
-import com.benzveen.pdfdigitalsignature.R;
-import com.benzveen.pdfdigitalsignature.Signature.SignatureView;
-import com.benzveen.pdfdigitalsignature.utils.ViewUtils;
+import androidx.core.view.ViewCompat;
+
+import com.sign.deftpdf.R;
+import com.sign.deftpdf.custom_views.signature.SignatureView;
+import com.sign.deftpdf.util.ViewUtils;
 
 public class PDSElementViewer {
     private static int MOTION_THRESHOLD = 3;
     private static int MOTION_THRESHOLD_LONG_PRESS = 12;
     private boolean mBorderShown = false;
-    private RelativeLayout mContainerView = null;
+    RelativeLayout mContainerView = null;
     private Context mContext = null;
     private PDSElement mElement = null;
-    private View mElementView = null;
+    View mElementView = null;
     private boolean mHasDragStarted = false;
-    private ImageButton mImageButton = null;
+    ImageButton mImageButton = null;
     private float mLastMotionX = 0.0f;
     private float mLastMotionY = 0.0f;
     private boolean mLongPress = false;
@@ -257,7 +254,7 @@ public class PDSElementViewer {
         this.mImageButton.setPadding(0, 0, 0, 0);
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(-2, -2);
         layoutParams.addRule(11);
-        layoutParams.addRule(15);
+        layoutParams.addRule(12);
         this.mImageButton.setLayoutParams(layoutParams);
         this.mImageButton.measure(Math.round(-2.0f), Math.round(-2.0f));
         this.mImageButton.layout(0, 0, this.mImageButton.getMeasuredWidth(), this.mImageButton.getMeasuredHeight());
@@ -293,7 +290,7 @@ public class PDSElementViewer {
     }
 
     public void showBorder() {
-        changeColor(true);
+        //changeColor(true);
         if (this.mContainerView.getParent() == null) {
             int signatureViewWidth;
             int signatureViewHeight;
@@ -309,19 +306,17 @@ public class PDSElementViewer {
             this.mElementView.setY(0.0f);
             if (this.mElementView instanceof SignatureView) {
                 signatureViewWidth = ((SignatureView) this.mElementView).getSignatureViewWidth() + (this.mImageButton.getMeasuredWidth() / 2);
-                signatureViewHeight = ((SignatureView) this.mElementView).getSignatureViewHeight();
+                signatureViewHeight = ((SignatureView) this.mElementView).getSignatureViewHeight()+ (this.mImageButton.getMeasuredHeight() / 2);
             } else {
                 // this.mElementView.measure(Math.round(-2.0f), Math.round(-2.0f));
                 // this.mElementView.layout(0, 0, this.mElementView.getMeasuredWidth(), this.mElementView.getMeasuredHeight());
                 signatureViewWidth = this.mElementView.getLayoutParams().width + (this.mImageButton.getMeasuredWidth() / 2);
-                signatureViewHeight = this.mElementView.getLayoutParams().height;
+                signatureViewHeight = this.mElementView.getLayoutParams().height+ (this.mImageButton.getMeasuredHeight() / 2);
             }
             this.mContainerView.setLayoutParams(new RelativeLayout.LayoutParams(signatureViewWidth, signatureViewHeight));
             this.mPageViewer.getPageView().addView(this.mContainerView);
         }
-        GradientDrawable gradientDrawable = new GradientDrawable();
-        gradientDrawable.setStroke(2, this.mContext.getResources().getColor(R.color.colorAccent));
-        this.mElementView.setBackground(gradientDrawable);
+        this.mElementView.setBackground(this.mContext.getResources().getDrawable(R.drawable.viewer_bg));
         this.mBorderShown = true;
     }
 
@@ -343,7 +338,7 @@ public class PDSElementViewer {
     }
 
     public void changeColor(boolean z) {
-        int color = z ? this.mContext.getResources().getColor(R.color.colorAccent) : ViewCompat.MEASURED_STATE_MASK;
+        int color = z ? this.mContext.getResources().getColor(R.color.main) : ViewCompat.MEASURED_STATE_MASK;
         if (this.mElementView instanceof SignatureView) {
             color = ((SignatureView) this.mElementView).getActualColor();
             ((SignatureView) this.mElementView).setStrokeColor(color);

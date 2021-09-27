@@ -10,6 +10,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
@@ -22,6 +23,9 @@ import com.sign.deftpdf.base.BaseActivity
 import com.sign.deftpdf.databinding.ActivityMainBinding
 import com.sign.deftpdf.model.BaseModel
 import com.sign.deftpdf.ui.check_auth.CheckAuthActivity
+import com.sign.deftpdf.ui.documents_screens.documents.DocumentsFragment
+import com.sign.deftpdf.ui.documents_screens.home.HomeFragment
+import com.sign.deftpdf.ui.documents_screens.library.LibraryFragment
 import com.sign.deftpdf.ui.main.menu.MenuAdapter
 import com.sign.deftpdf.ui.main.menu.Top
 import com.sign.deftpdf.util.LocalSharedUtil
@@ -39,10 +43,30 @@ class MainActivity : BaseActivity(R.layout.activity_main), StoreDocumentView {
     private lateinit var settingsBtn: AppCompatButton
     private lateinit var navController: NavController
     private val presenter: StoreDocumentPresenter = StoreDocumentPresenter(this)
+    private val listener = NavController.OnDestinationChangedListener { controller, destination, arguments ->
+        if (destination.id == R.id.navigation_home
+                || destination.id == R.id.navigation_documents
+                || destination.id == R.id.navigation_library) {
+            binding.addDocument.visibility = View.VISIBLE
+        } else {
+            binding.addDocument.visibility = View.GONE
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        navController.addOnDestinationChangedListener(listener)
+    }
+
+    override fun onPause() {
+        navController.removeOnDestinationChangedListener(listener)
+        super.onPause()
+    }
 
     internal val binding by viewBinding(ActivityMainBinding::bind)
     private val pickPDF = registerForActivityResult(ActivityResultContracts.GetContent()) { contentUri ->
-        loadPdfToServer(contentUri)
+        if (contentUri != null)
+            loadPdfToServer(contentUri)
     }
 
     var recycler_menu: RecyclerView? = null
@@ -56,6 +80,7 @@ class MainActivity : BaseActivity(R.layout.activity_main), StoreDocumentView {
         navController = Navigation.findNavController(this, R.id.nav_host_fragment)
 
         NavigationUI.setupWithNavController(binding.appTablayout, navController)
+
 
         initMenu()
         initListeners()
@@ -112,8 +137,6 @@ class MainActivity : BaseActivity(R.layout.activity_main), StoreDocumentView {
         menuAdapter!!.notifyDataSetChanged()
     }
 
-
-
     private fun initListeners() {
         with(binding) {
             addDocument.setOnClickListener { pickPDF.launch(Util.MIMETYPE_PDF) }
@@ -122,6 +145,7 @@ class MainActivity : BaseActivity(R.layout.activity_main), StoreDocumentView {
             mDrawer.closeDrawers()
             navController.navigate(R.id.navigation_account_setting)
         }
+
     }
 
     private fun loadPdfToServer(uri: Uri) {
@@ -169,6 +193,16 @@ class MainActivity : BaseActivity(R.layout.activity_main), StoreDocumentView {
             }
 
     override fun storeDocumentSuccess(data: BaseModel) {
-
+        when (navController.currentDestination?.id) {
+            R.id.navigation_documents -> {
+                navController.navigate(R.id.navigation_documents)
+            }
+            R.id.navigation_home -> {
+                navController.navigate(R.id.navigation_home)
+            }
+            R.id.navigation_library -> {
+                navController.navigate(R.id.navigation_library)
+            }
+        }
     }
 }

@@ -4,6 +4,8 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.sign.deftpdf.R
@@ -19,6 +21,7 @@ class HelpFragment : Fragment(R.layout.fragment_help), HelpView {
     private var adapter: HelpAdapter = HelpAdapter(list)
     private lateinit var presenter: HelpPresenter
     private lateinit var activity: MainActivity
+    private lateinit var navController: NavController
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -32,11 +35,12 @@ class HelpFragment : Fragment(R.layout.fragment_help), HelpView {
         presenter = HelpPresenter(activity)
         presenter.attachView(this)
         presenter.sendResponse()
+        navController = NavHostFragment.findNavController(this@HelpFragment)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        binding.backBtn.setOnClickListener { navController.popBackStack() }
         binding.questions.layoutManager = LinearLayoutManager(requireContext())
         binding.questions.adapter = adapter
     }

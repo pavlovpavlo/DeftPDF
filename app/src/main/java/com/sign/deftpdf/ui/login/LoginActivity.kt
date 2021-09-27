@@ -34,8 +34,8 @@ class LoginActivity : BaseActivity(R.layout.activity_login), LoginView, GetUserV
     private fun initListeners() {
         with(binding) {
             backBtn.setOnClickListener { finish() }
+            loginGoogle.setOnClickListener { startActivity(Intent(this@LoginActivity, LoginWebViewActivity::class.java)) }
             login.setOnClickListener { login() }
-            //loginGoogle.setOnClickListener { login() }
             forgotPass.setOnClickListener { openForgotPass() }
             createAccount.setOnClickListener { openCreateAccount() }
             passVisible.setOnClickListener { visibilityPassword() }

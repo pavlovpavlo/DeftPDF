@@ -1,13 +1,14 @@
-package com.benzveen.pdfdigitalsignature.Document;
+package com.sign.deftpdf.custom_views.documents;
 
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener;
 
-import com.benzveen.pdfdigitalsignature.DigitalSignatureActivity;
+import com.sign.deftpdf.ui.view_document.DocumentViewerActivity;
 
 import fr.castorflex.android.verticalviewpager.VerticalViewPager;
 
@@ -45,7 +46,7 @@ public class PDSViewPager extends VerticalViewPager {
                     }
                 }
                 if (PDSViewPager.this.mActivityContext != null) {
-                    ((DigitalSignatureActivity) PDSViewPager.this.mActivityContext).updatePageNumber(i + 1);
+                    //((DocumentViewerActivity) PDSViewPager.this.mActivityContext).updatePageNumber(i + 1);
                 }
             }
         });

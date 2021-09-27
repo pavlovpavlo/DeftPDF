@@ -1,4 +1,4 @@
-package com.sign.deftpdf.ui.documents_screens
+package com.sign.deftpdf.ui.request_signature
 
 import com.sign.deftpdf.api.ApiService
 import com.sign.deftpdf.api.RetrofitClient
@@ -11,7 +11,7 @@ import io.reactivex.schedulers.Schedulers
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 
-class DocumentsDeletePresenter(basicView: BasicView) : BasePresenter(basicView) {
+class RequestSignatureEmailPresenter(basicView: BasicView) : BasePresenter(basicView) {
     private lateinit var view: BaseModelView
     private var apiService: ApiService = RetrofitClient.ServiceBuilder.buildService()
 
@@ -19,10 +19,10 @@ class DocumentsDeletePresenter(basicView: BasicView) : BasePresenter(basicView) 
         this.view = view
     }
 
-    fun sendResponse(token: String, documentId: String) {
+    fun sendResponse(token: String, documentId: String, email: String, name: String, note: String) {
         val compositeDisposable = CompositeDisposable()
         compositeDisposable.add(
-                apiService.deleteDocument(documentId,token)
+                apiService.sendSignEmail(documentId,token, email, name, note)
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribeOn(Schedulers.io())
                         .subscribe({ response ->
@@ -35,7 +35,7 @@ class DocumentsDeletePresenter(basicView: BasicView) : BasePresenter(basicView) 
                         { t ->
                             if (t is SocketTimeoutException || t is UnknownHostException) super.showInternetError {
                                 sendResponse(
-                                        token, documentId
+                                        token, documentId, email, name, note
                                 )
                             } else {
                                 super.showError("Error connection")

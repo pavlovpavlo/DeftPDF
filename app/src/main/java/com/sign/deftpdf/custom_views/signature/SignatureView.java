@@ -1,6 +1,5 @@
-package com.benzveen.pdfdigitalsignature.Signature;
+package com.sign.deftpdf.custom_views.signature;
 
-import android.widget.RelativeLayout;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
@@ -12,12 +11,14 @@ import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.RectF;
-
-import androidx.core.view.ViewCompat;
-
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.RelativeLayout;
+
+import androidx.core.view.ViewCompat;
+
+import com.sign.deftpdf.ui.draw.DrawActivity;
 
 import java.util.ArrayList;
 
@@ -492,8 +493,8 @@ public class SignatureView extends RelativeLayout {
 
     public void enableToolBarButton() {
         if (getContext() != null) {
-            ((FreeHandActivity) getContext()).enableClear(true);
-            ((FreeHandActivity) getContext()).enableSave(true);
+            ((DrawActivity) getContext()).enableClear(true);
+            ((DrawActivity) getContext()).enableSave(true);
         }
     }
 

@@ -11,10 +11,11 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 object Util {
-    const val BASE_URL = "http://pdf.webstaginghub.com/api/"
-    const val DATA_URL = "http://pdf.webstaginghub.com/"
-    var MIMETYPE_PDF = "application/pdf"
-    var SORT_BY = "created_at"
+    const val BASE_URL = "https://pdf.webstaginghub.com/api/"
+    const val DATA_URL = "https://pdf.webstaginghub.com/"
+    const val MIMETYPE_PDF = "application/pdf"
+    const val MIMETYPE_IMAGES = "image/*"
+    var SORT_BY = "updated_at"
     var SORT_DESC = "desc"
     var SORT_ASC = "asc"
     var STATUS_SIGNED = "signed"

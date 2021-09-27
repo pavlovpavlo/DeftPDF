@@ -1,15 +1,12 @@
-package com.benzveen.pdfdigitalsignature.Document;
+package com.sign.deftpdf.custom_views.documents;
 
-import android.util.SizeF;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.os.AsyncTask;
 import android.util.SizeF;
 
-import com.benzveen.pdfdigitalsignature.PDF.PDSPDFPage;
-
-public class PDSRenderPageAsyncTask extends AsyncTask<Void, Void, Bitmap>  {
+public class PDSRenderPageAsyncTask extends AsyncTask<Void, Void, Bitmap> {
     private static final int MAX_BITMAP_SIZE = 3072;
     private SizeF mBitmapSize = null;
     private Context mContext = null;

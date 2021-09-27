@@ -1,4 +1,4 @@
-package com.benzveen.pdfdigitalsignature.Document;
+package com.sign.deftpdf.custom_views.documents;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -10,37 +10,39 @@ import android.graphics.RectF;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.SystemClock;
-
-import androidx.core.view.MotionEventCompat;
-import androidx.core.view.ViewCompat;
-
+import android.util.DisplayMetrics;
+import android.util.SizeF;
 import android.view.DragEvent;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
+import android.view.ScaleGestureDetector.SimpleOnScaleGestureListener;
 import android.view.View;
 import android.view.ViewConfiguration;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.OverScroller;
 import android.widget.RelativeLayout;
-import android.view.ScaleGestureDetector.SimpleOnScaleGestureListener;
-import android.util.SizeF;
 
-import com.benzveen.pdfdigitalsignature.DigitalSignatureActivity;
-import com.benzveen.pdfdigitalsignature.PDF.PDSPDFPage;
-import com.benzveen.pdfdigitalsignature.PDSModel.PDSElement;
-import com.benzveen.pdfdigitalsignature.R;
-import com.benzveen.pdfdigitalsignature.Signature.SignatureView;
-import com.benzveen.pdfdigitalsignature.utils.PDSSignatureUtils;
-import com.benzveen.pdfdigitalsignature.utils.ViewUtils;
+import androidx.cardview.widget.CardView;
+import androidx.core.view.MotionEventCompat;
+import androidx.core.view.ViewCompat;
+
+import com.sign.deftpdf.R;
+import com.sign.deftpdf.custom_views.signature.SignatureView;
+import com.sign.deftpdf.ui.view_document.DocumentViewerActivity;
+import com.sign.deftpdf.util.ViewUtils;
 
 import java.io.File;
 import java.util.Observable;
 import java.util.Observer;
+
+import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
+import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 public class PDSPageViewer extends FrameLayout implements Observer {
     private final ImageView mImageView;
@@ -59,6 +61,7 @@ public class PDSPageViewer extends FrameLayout implements Observer {
     private float mStartScaleFactor = 1.0f;
     private int mMaxScrollX = 0;
     private int mMaxScrollY = 0;
+    private float startHeight = 1;
     private RelativeLayout mPageView = null;
     private RelativeLayout mScrollView = null;
     private OverScroller mScroller = null;
@@ -89,9 +92,9 @@ public class PDSPageViewer extends FrameLayout implements Observer {
     private float mTouchX = 0.0f;
     private float mTouchY = 0.0f;
     private ImageView mDragShadowView = null;
-    DigitalSignatureActivity activity = null;
+    DocumentViewerActivity activity = null;
 
-    public PDSPageViewer(Context context, DigitalSignatureActivity activity, PDSPDFPage pdfPage) {
+    public PDSPageViewer(Context context, DocumentViewerActivity activity, PDSPDFPage pdfPage) {
         super(context);
         this.mContext = context;
         this.activity = activity;
@@ -394,8 +397,8 @@ public class PDSPageViewer extends FrameLayout implements Observer {
         }
     }
 
-    public DigitalSignatureActivity getDocumentViewer() {
-        return (DigitalSignatureActivity) this.mContext;
+    public DocumentViewerActivity getDocumentViewer() {
+        return (DocumentViewerActivity) this.mContext;
     }
 
     private int getMaxScrollX() {
@@ -613,7 +616,7 @@ public class PDSPageViewer extends FrameLayout implements Observer {
         return this.mLastFocusedElementViewer;
     }
 
-    public PDSElement createElement(PDSElement.PDSElementType fASElementType, File file, float f, float f2, float f3, float f4) {
+    public PDSElement createElement(PDSElement.PDSElementType fASElementType, String file, float f, float f2, float f3, float f4) {
         PDSElement fASElement = new PDSElement(fASElementType, file);
         //fASElement.setContent(fASElementContent);
         fASElement.setRect(mapRectToPDFCoordinates(new RectF(f, f2, f + f3, f2 + f4)));
@@ -655,8 +658,9 @@ public class PDSPageViewer extends FrameLayout implements Observer {
         hideElementCreationMenu();
         fASElementViewer.showBorder();
         this.mLastFocusedElementViewer = fASElementViewer;
-        View inflate = this.mInflater.inflate(R.layout.element_prop_menu_layout, null, false);
+        View inflate = this.mInflater.inflate(R.layout.element_prop_menu_layout, null, true);
         inflate.setTag(fASElementViewer);
+
         this.mScrollView.addView(inflate);
         this.mElementPropMenu = inflate;
 
@@ -667,10 +671,7 @@ public class PDSPageViewer extends FrameLayout implements Observer {
 
             }
         });
-
-
         setMenuPosition(fASElementViewer.getContainerView(), inflate);
-
     }
 
     public void hideElementCreationMenu() {
@@ -683,31 +684,20 @@ public class PDSPageViewer extends FrameLayout implements Observer {
 
     private void setMenuPosition(float f, float f2, View view, boolean z) {
         view.measure(0, 0);
-        float f3 = this.mScaleFactor * f;
-        if (z) {
-            f3 -= (float) (view.getMeasuredWidth() / 2);
-        }
+        float measire;
+        if (mLastFocusedElementViewer.mElementView instanceof SignatureView)
+            measire = ((SignatureView) mLastFocusedElementViewer.mElementView).getSignatureViewWidth();
+        else
+            measire = ((ImageView) mLastFocusedElementViewer.mElementView).getMeasuredWidth();
+        float f3 = f * this.mScaleFactor + measire / 3.6f;
         float dimension = (this.mScaleFactor * f2) - ((float) ((int) getResources().getDimension(R.dimen.menu_offset_y)));
-        RectF rectF = new RectF(f3, dimension, ((float) view.getMeasuredWidth()) + f3, ((float) view.getMeasuredHeight()) + dimension);
-        RectF visibleRect = getVisibleRect();
-        visibleRect.intersect(getImageContentRect());
-        if (!visibleRect.contains(rectF)) {
-            if (f3 > (visibleRect.right * this.mScaleFactor) - ((float) view.getMeasuredWidth())) {
-                f3 = (visibleRect.right * this.mScaleFactor) - ((float) view.getMeasuredWidth());
-            } else if (f3 < visibleRect.left * this.mScaleFactor && z) {
-                f3 = visibleRect.left * this.mScaleFactor;
-            }
-            if (dimension < visibleRect.top * this.mScaleFactor) {
-                if (z) {
-                    dimension = (f2 * this.mScaleFactor) + ((float) ((int) getResources().getDimension(R.dimen.menu_offset_x)));
-                } else if (f3 > ((visibleRect.left * this.mScaleFactor) + ((float) view.getMeasuredWidth())) + ((float) ((int) getResources().getDimension(R.dimen.menu_offset_x)))) {
-                    f3 = ((f * this.mScaleFactor) - ((float) view.getMeasuredWidth())) - ((float) ((int) getResources().getDimension(R.dimen.menu_offset_x)));
-                    dimension = f2 * this.mScaleFactor;
-                }
-            }
-        }
+
         view.setX(f3);
         view.setY(dimension);
+    }
+
+    private float convertDpToPixel(float px, Context context) {
+        return px / ((float) context.getResources().getDisplayMetrics().densityDpi / DisplayMetrics.DENSITY_DEFAULT);
     }
 
     private void setMenuPosition(View view, View view2) {

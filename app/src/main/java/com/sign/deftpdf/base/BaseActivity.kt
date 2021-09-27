@@ -6,15 +6,17 @@ import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.sign.deftpdf.R
-import com.sign.deftpdf.model.documents.DocumentData
+import com.sign.deftpdf.model.documents.DocumentsData
 import com.sign.deftpdf.ui.main.MainActivity
 import com.sign.deftpdf.ui.login.LoginActivity
 import com.sign.deftpdf.ui.registration.CreateAccountActivity
+import com.sign.deftpdf.ui.view_document.DocumentViewerActivity
 import com.sign.deftpdf.util.NoInternetConnectionUtil
 
 open class BaseActivity(contentLayoutId: Int) : AppCompatActivity(contentLayoutId), BasicView {
 
     private var ERROR_TIME_SECOND = 4L
+
 
     override fun showError(message: String) {
         val countDownTimer: CountDownTimer
@@ -48,6 +50,7 @@ open class BaseActivity(contentLayoutId: Int) : AppCompatActivity(contentLayoutI
 
     }
 
+
     fun openMain() {
         startActivity(Intent(this, MainActivity::class.java))
         finishAffinity()
@@ -61,8 +64,10 @@ open class BaseActivity(contentLayoutId: Int) : AppCompatActivity(contentLayoutI
         startActivity(Intent(this, CreateAccountActivity::class.java))
     }
 
-    fun openDocumentShow(data: DocumentData){
-
+    fun openDocumentShow(data: DocumentsData){
+        val intent = Intent(this, DocumentViewerActivity::class.java)
+        intent.putExtra("document", data)
+        startActivity(intent)
     }
 
 }

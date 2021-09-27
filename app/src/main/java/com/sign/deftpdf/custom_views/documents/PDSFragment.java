@@ -1,14 +1,15 @@
-package com.benzveen.pdfdigitalsignature.Document;
+package com.sign.deftpdf.custom_views.documents;
 
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import com.benzveen.pdfdigitalsignature.DigitalSignatureActivity;
-import com.benzveen.pdfdigitalsignature.R;
+import androidx.fragment.app.Fragment;
+
+import com.sign.deftpdf.R;
+import com.sign.deftpdf.ui.view_document.DocumentViewerActivity;
 
 public class PDSFragment extends Fragment {
 
@@ -26,7 +27,10 @@ public class PDSFragment extends Fragment {
         View inflate = layoutInflater.inflate(R.layout.fragment_layout, viewGroup, false);
         LinearLayout linearLayout = (LinearLayout) inflate.findViewById(R.id.fragment);
         try {
-            PDSPageViewer fASPageViewer = new PDSPageViewer(viewGroup.getContext(),(DigitalSignatureActivity) getActivity(),((DigitalSignatureActivity) getActivity()).getDocument().getPage(getArguments().getInt("pageNum")));
+            PDSPageViewer fASPageViewer =
+                    new PDSPageViewer(viewGroup.getContext(),
+                            (DocumentViewerActivity) getActivity(),
+                            ((DocumentViewerActivity) getActivity()).getDocument().getPage(getArguments().getInt("pageNum")));
             this.mPageViewer = fASPageViewer;
             linearLayout.addView(fASPageViewer);
         } catch (Exception e) {

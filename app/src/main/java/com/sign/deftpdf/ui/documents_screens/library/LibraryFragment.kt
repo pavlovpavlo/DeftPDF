@@ -19,7 +19,7 @@ import com.sign.deftpdf.base.BaseFragment
 import com.sign.deftpdf.base.BaseModelView
 import com.sign.deftpdf.databinding.FragmentLibraryBinding
 import com.sign.deftpdf.model.BaseModel
-import com.sign.deftpdf.model.documents.DocumentData
+import com.sign.deftpdf.model.documents.DocumentsData
 import com.sign.deftpdf.model.documents.DocumentsModel
 import com.sign.deftpdf.ui.documents_screens.*
 import com.sign.deftpdf.ui.documents_screens.delete.DeleteDocumentDialog
@@ -42,7 +42,7 @@ class LibraryFragment : BaseFragment(R.layout.fragment_library), DocumentsView, 
     private var page: Int = 1
     private var perPage: Int = 50
     private lateinit var documentModel: DocumentsModel
-    private var list: MutableList<DocumentData> = listOf<DocumentData>().toMutableList()
+    private var list: MutableList<DocumentsData> = listOf<DocumentsData>().toMutableList()
     private var adapter: DocumentsAdapter = DocumentsAdapter(listOf())
     private val currentDate: String =
             SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(
@@ -69,7 +69,7 @@ class LibraryFragment : BaseFragment(R.layout.fragment_library), DocumentsView, 
         initListeners()
     }
 
-    private fun sendRequest() {
+    fun sendRequest() {
         presenter.sendResponse(DeftApp.user.apiToken!!,
                 page.toString(), perPage.toString(),
                 Util.SORT_BY, DeftApp.sortTypeLibrary,
@@ -77,7 +77,7 @@ class LibraryFragment : BaseFragment(R.layout.fragment_library), DocumentsView, 
     }
 
     private fun showDetailDialog(position: Int) {
-        val data: DocumentData = list[position]
+        val data: DocumentsData = list[position]
         val view: View = showDocumentDetailPopup()
 
         val documentName: TextView = view.findViewById(R.id.document_name)
@@ -298,7 +298,7 @@ class LibraryFragment : BaseFragment(R.layout.fragment_library), DocumentsView, 
     }
 
     private fun filter(text: String) {
-        val newList = mutableListOf<DocumentData>()
+        val newList = mutableListOf<DocumentsData>()
         for (item in list) {
             item.originalName?.let {
                 if (it.toLowerCase().contains(text.toLowerCase())) {

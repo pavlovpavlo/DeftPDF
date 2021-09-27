@@ -11,18 +11,18 @@ import io.reactivex.schedulers.Schedulers
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 
-class RequestSignatureEmailPresenter(basicView: BasicView) : BasePresenter(basicView) {
-    private lateinit var view: BaseModelView
+class RequestSignatureLinkPresenter(basicView: BasicView) : BasePresenter(basicView) {
+    private lateinit var view: RequestLinkView
     private var apiService: ApiService = RetrofitClient.ServiceBuilder.buildService()
 
-    fun attachView(view: BaseModelView) {
+    fun attachView(view: RequestLinkView) {
         this.view = view
     }
 
-    fun sendResponse(token: String, documentId: String, email: String, name: String, note: String) {
+    fun sendResponse(token: String, documentId: String, email: String, name: String) {
         val compositeDisposable = CompositeDisposable()
         compositeDisposable.add(
-                apiService.sendSignEmail(documentId,token, email, name, note)
+                apiService.createSignLink(documentId,token, email, name)
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribeOn(Schedulers.io())
                         .subscribe({ response ->
@@ -35,7 +35,7 @@ class RequestSignatureEmailPresenter(basicView: BasicView) : BasePresenter(basic
                         { t ->
                             if (t is SocketTimeoutException || t is UnknownHostException) super.showInternetError {
                                 sendResponse(
-                                        token, documentId, email, name, note
+                                        token, documentId, email, name
                                 )
                             } else {
                                 super.showError("Error connection")

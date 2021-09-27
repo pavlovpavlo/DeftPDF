@@ -7,9 +7,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.sign.deftpdf.R
-import com.sign.deftpdf.model.documents.DocumentData
+import com.sign.deftpdf.model.documents.DocumentsData
 
-class DocumentsAdapter(private var mList: List<DocumentData>) : RecyclerView.Adapter<DocumentsAdapter.ViewHolder>() {
+class DocumentsAdapter(private var mList: List<DocumentsData>) : RecyclerView.Adapter<DocumentsAdapter.ViewHolder>() {
 
     interface OnDocumentClickListener {
         fun onDetailClick(position: Int)
@@ -30,7 +30,7 @@ class DocumentsAdapter(private var mList: List<DocumentData>) : RecyclerView.Ada
         val documentData = mList[position]
 
         holder.documentName.text = documentData.originalName
-        holder.documentDate.text = documentData.createdAt
+        holder.documentDate.text = documentData.updatedAt
         holder.itemView.setOnClickListener { listener.onItemClick(position) }
         holder.documentDetail.setOnClickListener { listener.onDetailClick(position) }
 
@@ -52,7 +52,7 @@ class DocumentsAdapter(private var mList: List<DocumentData>) : RecyclerView.Ada
         })
     }
 
-    fun setDocuments(list: List<DocumentData>) {
+    fun setDocuments(list: List<DocumentsData>) {
         mList = list
         notifyDataSetChanged()
     }

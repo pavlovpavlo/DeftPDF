@@ -1,11 +1,9 @@
-package com.benzveen.pdfdigitalsignature.Signature;
+package com.sign.deftpdf.custom_views.signature;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.RectF;
-import android.provider.ContactsContract;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.google.gson.Gson;
@@ -62,11 +60,12 @@ public class SignatureUtils {
 
     }
 
-    public static SignatureView createFreeHandView(int i, File file, Context context) {
+    public static SignatureView createFreeHandView(int i, String file, Context context) {
         int i2 = i - 30;
         SignatureView signatureView = null;
         try {
-            ViewHolder readSignatureHolder = readSignatureHolder(context, file);
+            ViewHolder readSignatureHolder = new Gson().fromJson(file, new TypeToken<ViewHolder>() {
+            }.getType());
             if (readSignatureHolder != null) {
                 if (((float) i) > readSignatureHolder.boundingBox.height()) {
                     EXTRA_WIDTH_PADDING = 30;
@@ -117,11 +116,12 @@ public class SignatureUtils {
         return signatureView;
     }
 
-    public static SignatureView createFreeHandView(int i, int i2, File file, Context context) {
+    public static SignatureView createFreeHandView(int i, int i2, String file, Context context) {
         Exception e;
         SignatureView signatureView = null;
         try {
-            ViewHolder readSignatureHolder = readSignatureHolder(context, file);
+            ViewHolder readSignatureHolder = new Gson().fromJson(file, new TypeToken<ViewHolder>() {
+            }.getType());
             if (readSignatureHolder != null) {
                 RectF rectF = readSignatureHolder.boundingBox;
                 float fitXYScale = (rectF.height() > 1.0f || rectF.width() > 1.0f) ? getFitXYScale(i, i2, file, context) : 1.0f;
@@ -190,8 +190,9 @@ public class SignatureUtils {
         }
     }
 
-    private static float getFitXYScale(int i, int i2, File file, Context context) {
-        ViewHolder readSignatureHolder = readSignatureHolder(context, file);
+    private static float getFitXYScale(int i, int i2, String file, Context context) {
+        ViewHolder readSignatureHolder = new Gson().fromJson(file, new TypeToken<ViewHolder>() {
+        }.getType());
         if (readSignatureHolder != null) {
             float f = 0.0f;
             if (readSignatureHolder.boundingBox.height() != 0.0f) {

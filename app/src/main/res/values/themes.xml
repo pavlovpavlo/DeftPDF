@@ -2,13 +2,15 @@
     <!-- Base application theme. -->
     <style name="Theme.DeftPDF" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimary">@color/main</item>
         <item name="colorPrimaryVariant">@color/white</item>
         <item name="colorOnPrimary">@color/white</item>
 
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
 
-        <item name="android:background">@color/white</item>
+        <item name="android:windowBackground">@color/white</item>
+        <item name="android:colorBackground">@color/white</item>
+
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowActionBar">false</item>
         <item name="android:windowFullscreen">true</item>
@@ -49,4 +51,25 @@
         <item name="colorControlActivated">@color/main</item>
     </style>
 
+    <style name="Theme.DeftPDF.InvisibleActionBar">
+        <item name="actionBarStyle">@style/InvisibleActionBar</item>
+    </style>
+
+    <style name="InvisibleActionBar">
+        <item name="background">@android:color/white</item>
+    </style>
+
+
+    <style name="MyCustomTabLayout" parent="Widget.Design.TabLayout">
+        <item name="tabTextAppearance">@style/MyCustomTextAppearance</item>
+        <item name="colorPrimary">@color/main</item>
+        <item name="tabSelectedTextColor">@color/main</item>
+        <item name="colorPrimaryVariant">@color/main</item>
+        <item name="colorOnPrimary">@color/main</item>
+        <item name="tabTextColor">#F5F5F5</item>
+    </style>
+
+    <style name="MyCustomTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="textAllCaps">false</item>
+    </style>
 </resources>

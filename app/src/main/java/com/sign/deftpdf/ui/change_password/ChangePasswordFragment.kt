@@ -38,6 +38,7 @@ class ChangePasswordFragment : Fragment(R.layout.fragment_change_password), Chan
             changePassword.setOnClickListener { changePassword() }
             passShower.setOnClickListener { visibilityPassword() }
             passRepeatShower.setOnClickListener { visibilityPasswordRepeat() }
+            backBtn.setOnClickListener { navController.popBackStack() }
         }
     }
 

@@ -5,8 +5,8 @@ import com.sign.deftpdf.model.BaseModel
 
 class DocumentsModel : BaseModel() {
     @SerializedName("data")
-    var data: MutableList<DocumentData>? = null
+    var data: MutableList<DocumentsData>? = null
 
     @SerializedName("info")
-    var info: DocumentInfo? = null
+    var info: DocumentsInfo? = null
 }

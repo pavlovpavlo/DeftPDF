@@ -1,4 +1,4 @@
-package com.benzveen.pdfdigitalsignature.Document;
+package com.sign.deftpdf.custom_views.documents;
 
 import android.graphics.Bitmap;
 import android.graphics.RectF;
@@ -26,7 +26,7 @@ public class PDSElement {
 
     public PDSElementViewer mElementViewer;
 
-    private File mfile = null;
+    private String mfile = null;
 
     private Bitmap bitmap = null;
 
@@ -39,7 +39,7 @@ public class PDSElement {
         PDSElementTypeSignature
     }
 
-    public PDSElement(PDSElementType fASElementType, File file) {
+    public PDSElement(PDSElementType fASElementType, String file) {
         this.mType = fASElementType;
         mfile = file;
     }
@@ -121,7 +121,7 @@ public class PDSElement {
         return this.mLetterSpace;
     }
 
-    public File getFile() {
+    public String getFile() {
         return mfile;
     }
 

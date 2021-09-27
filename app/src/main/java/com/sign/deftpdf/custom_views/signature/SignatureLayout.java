@@ -1,17 +1,12 @@
-package com.benzveen.pdfdigitalsignature.Signature;
+package com.sign.deftpdf.custom_views.signature;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
-import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
-import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
-
-import com.benzveen.pdfdigitalsignature.R;
+import com.sign.deftpdf.R;
 
 public class SignatureLayout extends RelativeLayout {
 
