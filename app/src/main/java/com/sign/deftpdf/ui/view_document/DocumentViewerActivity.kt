@@ -57,9 +57,9 @@ class DocumentViewerActivity : BaseActivity(R.layout.activity_document_viewer), 
 
             if (!activity.hasPermissions(activity, activity.PERMISSIONS)) {
                 ActivityCompat.requestPermissions(
-                        activity,
-                        activity.PERMISSIONS,
-                        activity.PERMISSION_ALL
+                    activity,
+                    activity.PERMISSIONS,
+                    activity.PERMISSION_ALL
                 )
             }
 
@@ -81,9 +81,9 @@ class DocumentViewerActivity : BaseActivity(R.layout.activity_document_viewer), 
         override fun onPostExecute(result: Void?) {
             super.onPostExecute(result)
             activity.OpenPDFViewer(
-                    Uri.parse(
-                            "file:///" + activity.getExternalFilesDir(null)?.absolutePath + "/pdfsdcard_location/test.pdf"
-                    )
+                Uri.parse(
+                    "file:///" + activity.getExternalFilesDir(null)?.absolutePath + "/pdfsdcard_location/test.pdf"
+                )
             )
         }
     }
@@ -107,8 +107,8 @@ class DocumentViewerActivity : BaseActivity(R.layout.activity_document_viewer), 
     var status = "signed"
     var PERMISSION_ALL = 1
     var PERMISSIONS = arrayOf(
-            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.READ_EXTERNAL_STORAGE
+        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        Manifest.permission.READ_EXTERNAL_STORAGE
     )
     private lateinit var popup: PopupWindow
 
@@ -124,8 +124,8 @@ class DocumentViewerActivity : BaseActivity(R.layout.activity_document_viewer), 
         val inflater = getSystemService(AppCompatActivity.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view: View = inflater.inflate(layout, null)
         popup = PopupWindow(
-                view, RelativeLayout.LayoutParams.MATCH_PARENT,
-                RelativeLayout.LayoutParams.WRAP_CONTENT, true
+            view, RelativeLayout.LayoutParams.MATCH_PARENT,
+            RelativeLayout.LayoutParams.WRAP_CONTENT, true
         )
         popup.animationStyle = R.style.popup_window_animation_phone
         popup.isOutsideTouchable = true
@@ -151,9 +151,9 @@ class DocumentViewerActivity : BaseActivity(R.layout.activity_document_viewer), 
             }
         })
         updatePresenter.sendResponse(
-                DeftApp.user.apiToken!!,
-                data.id.toString(),
-                multipartBody, status, data.originalName
+            DeftApp.user.apiToken!!,
+            data.id.toString(),
+            multipartBody, status, data.originalName
         )
     }
 
@@ -183,14 +183,14 @@ class DocumentViewerActivity : BaseActivity(R.layout.activity_document_viewer), 
                     DrawActivity.listener = this@DocumentViewerActivity
                     startActivity(Intent(this@DocumentViewerActivity, DrawActivity::class.java))
                 } else {
-                    if(DeftApp.user.initials?.stringSignature.isNullOrEmpty()) {
+                    if (DeftApp.user.initials?.stringSignature.isNullOrEmpty()) {
                         Glide.with(this@DocumentViewerActivity)
                             .asBitmap()
                             .load(Util.DATA_URL + DeftApp.user.initials?.url)
                             .into(object : CustomTarget<Bitmap>() {
                                 override fun onResourceReady(
-                                        resource: Bitmap,
-                                        transition: Transition<in Bitmap>?
+                                    resource: Bitmap,
+                                    transition: Transition<in Bitmap>?
                                 ) {
                                     saveImageBitmap(resource)
                                 }
@@ -198,12 +198,12 @@ class DocumentViewerActivity : BaseActivity(R.layout.activity_document_viewer), 
                                 override fun onLoadCleared(placeholder: Drawable?) {
                                 }
                             })
-                    }else{
+                    } else {
                         saveImageViewHolder(
-                                Gson().fromJson(
-                                        DeftApp.user.initials?.stringSignature,
-                                        object : TypeToken<SignatureUtils.ViewHolder?>() {}.type
-                                )
+                            Gson().fromJson(
+                                DeftApp.user.initials?.stringSignature,
+                                object : TypeToken<SignatureUtils.ViewHolder?>() {}.type
+                            )
                         )
                     }
                 }
@@ -213,27 +213,27 @@ class DocumentViewerActivity : BaseActivity(R.layout.activity_document_viewer), 
                     DrawActivity.listener = this@DocumentViewerActivity
                     startActivity(Intent(this@DocumentViewerActivity, DrawActivity::class.java))
                 } else {
-                    if(DeftApp.user.sign?.stringSignature.isNullOrEmpty()) {
-                    Glide.with(this@DocumentViewerActivity)
-                        .asBitmap()
-                        .load(Util.DATA_URL + DeftApp.user.sign?.url)
-                        .into(object : CustomTarget<Bitmap>() {
-                            override fun onResourceReady(
+                    if (DeftApp.user.sign?.stringSignature.isNullOrEmpty()) {
+                        Glide.with(this@DocumentViewerActivity)
+                            .asBitmap()
+                            .load(Util.DATA_URL + DeftApp.user.sign?.url)
+                            .into(object : CustomTarget<Bitmap>() {
+                                override fun onResourceReady(
                                     resource: Bitmap,
                                     transition: Transition<in Bitmap>?
-                            ) {
-                                saveImageBitmap(resource)
-                            }
+                                ) {
+                                    saveImageBitmap(resource)
+                                }
 
-                            override fun onLoadCleared(placeholder: Drawable?) {
-                            }
-                        })
-                    }else{
+                                override fun onLoadCleared(placeholder: Drawable?) {
+                                }
+                            })
+                    } else {
                         saveImageViewHolder(
-                                Gson().fromJson(
-                                        DeftApp.user.sign?.stringSignature,
-                                        object : TypeToken<SignatureUtils.ViewHolder?>() {}.type
-                                )
+                            Gson().fromJson(
+                                DeftApp.user.sign?.stringSignature,
+                                object : TypeToken<SignatureUtils.ViewHolder?>() {}.type
+                            )
                         )
                     }
                 }
@@ -292,19 +292,19 @@ class DocumentViewerActivity : BaseActivity(R.layout.activity_document_viewer), 
 
     override fun saveImageBitmap(bitmap: Bitmap) {
         this.addElement(
-                PDSElement.PDSElementType.PDSElementTypeImage,
-                bitmap,
-                resources.getDimension(R.dimen.sign_field_default_height),
-                resources.getDimension(R.dimen.sign_field_default_height)
+            PDSElement.PDSElementType.PDSElementTypeImage,
+            bitmap,
+            resources.getDimension(R.dimen.sign_field_default_height),
+            resources.getDimension(R.dimen.sign_field_default_height)
         )
     }
 
     override fun saveImageViewHolder(viewHolder: SignatureUtils.ViewHolder) {
         this.addElement(
-                PDSElement.PDSElementType.PDSElementTypeSignature,
-                Gson().toJson(viewHolder),
-                resources.getDimension(R.dimen.sign_field_default_height),
-                resources.getDimension(R.dimen.sign_field_default_height)
+            PDSElement.PDSElementType.PDSElementTypeSignature,
+            Gson().toJson(viewHolder),
+            resources.getDimension(R.dimen.sign_field_default_height),
+            resources.getDimension(R.dimen.sign_field_default_height)
         )
     }
 
@@ -312,9 +312,9 @@ class DocumentViewerActivity : BaseActivity(R.layout.activity_document_viewer), 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && context != null) {
             for (permission in permissions) {
                 if (ActivityCompat.checkSelfPermission(
-                                context,
-                                permission[0]
-                        ) != PackageManager.PERMISSION_GRANTED
+                        context,
+                        permission[0]
+                    ) != PackageManager.PERMISSION_GRANTED
                 ) {
                     return false
                 }
@@ -332,9 +332,9 @@ class DocumentViewerActivity : BaseActivity(R.layout.activity_document_viewer), 
                 }
             } else {
                 Toast.makeText(
-                        this@DocumentViewerActivity,
-                        "Digital certificate is not added with Signature",
-                        Toast.LENGTH_LONG
+                    this@DocumentViewerActivity,
+                    "Digital certificate is not added with Signature",
+                    Toast.LENGTH_LONG
                 ).show()
             }
         }
@@ -355,9 +355,9 @@ class DocumentViewerActivity : BaseActivity(R.layout.activity_document_viewer), 
         } catch (e: Exception) {
             e.printStackTrace()
             Toast.makeText(
-                    this@DocumentViewerActivity,
-                    "Cannot open PDF, either PDF is corrupted or password protected",
-                    Toast.LENGTH_LONG
+                this@DocumentViewerActivity,
+                "Cannot open PDF, either PDF is corrupted or password protected",
+                Toast.LENGTH_LONG
             ).show()
             finish()
         }
@@ -423,10 +423,10 @@ class DocumentViewerActivity : BaseActivity(R.layout.activity_document_viewer), 
 
 
     fun addElement(
-            fASElementType: PDSElement.PDSElementType,
-            bitmap: Bitmap?,
-            f: Float,
-            f2: Float
+        fASElementType: PDSElement.PDSElementType,
+        bitmap: Bitmap?,
+        f: Float,
+        f2: Float
     ) {
         val focusedChild: View = binding.mViewPager.focusedChild
         if (focusedChild != null && bitmap != null) {

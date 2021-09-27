@@ -88,11 +88,11 @@ class MainActivity : BaseActivity(R.layout.activity_main), StoreDocumentView {
     }
 
     override fun startLoader() {
-        findViewById<View>(R.id.progress_main).visibility = View.VISIBLE
+        //findViewById<View>(R.id.progress_main).visibility = View.VISIBLE
     }
 
     override fun stopLoader() {
-        findViewById<View>(R.id.progress_main).visibility = View.GONE
+        //findViewById<View>(R.id.progress_main).visibility = View.GONE
     }
 
     private fun initMenu() {

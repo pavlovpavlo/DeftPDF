@@ -1,5 +1,6 @@
 package com.sign.deftpdf.ui.registration
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
@@ -12,6 +13,7 @@ import com.sign.deftpdf.base.BaseActivity
 import com.sign.deftpdf.databinding.ActivityCreateAccountBinding
 import com.sign.deftpdf.model.login.AuthModel
 import com.sign.deftpdf.model.user.UserModel
+import com.sign.deftpdf.ui.login.LoginWebViewActivity
 import com.sign.deftpdf.ui.main.GetUserPresenter
 import com.sign.deftpdf.ui.main.GetUserView
 import com.sign.deftpdf.util.LocalSharedUtil
@@ -42,7 +44,7 @@ class CreateAccountActivity : BaseActivity(R.layout.activity_create_account), Cr
     private fun initListeners() {
         with(binding) {
             backBtn.setOnClickListener { finish() }
-            //signUpGoogle.setOnClickListener { openMain() }
+            signUpGoogle.setOnClickListener { startActivity(Intent(this@CreateAccountActivity, LoginWebViewActivity::class.java)) }
             createAccount.setOnClickListener { registration() }
             haveAccount.setOnClickListener { openLogin() }
             passShower.setOnClickListener { visibilityPassword() }

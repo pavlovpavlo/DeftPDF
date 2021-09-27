@@ -131,7 +131,6 @@ interface ApiService {
         @Query("string_signature") signSignature: String?
     ): Observable<UserModel>
 
-    @FormUrlEncoded
     @Multipart
     @Headers("Accept: application/json")
     @POST("user/sign-initial/store")
