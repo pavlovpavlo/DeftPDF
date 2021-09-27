@@ -162,6 +162,7 @@ class DocumentViewerActivity : BaseActivity(R.layout.activity_document_viewer), 
 
         mContext = applicationContext
         data = intent.getSerializableExtra("document") as DocumentsData
+        startLoader()
         DownloadFile(this).execute(Util.DATA_URL + data.originalDocument)
         initListeners()
     }
@@ -346,6 +347,7 @@ class DocumentViewerActivity : BaseActivity(R.layout.activity_document_viewer), 
     }
 
     private fun OpenPDFViewer(pdfData: Uri?) {
+       stopLoader()
         try {
             val document = PDSPDFDocument(this, pdfData)
             document.open()
