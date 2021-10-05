@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
@@ -17,6 +18,8 @@ import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.google.android.material.navigation.NavigationBarMenuView
+import com.google.android.material.navigation.NavigationBarView
 import com.sign.deftpdf.DeftApp
 import com.sign.deftpdf.R
 import com.sign.deftpdf.base.BaseActivity
@@ -36,7 +39,7 @@ import java.util.*
 
 
 class MainActivity : BaseActivity(R.layout.activity_main), StoreDocumentView {
-
+    private var restart=false;
     lateinit var mDrawer: DrawerLayout
     private lateinit var settingsBtn: AppCompatButton
     private lateinit var navController: NavController
@@ -221,12 +224,17 @@ class MainActivity : BaseActivity(R.layout.activity_main), StoreDocumentView {
 
 
     override fun onRestart() {
-        navController.navigate(lastDestinationId)
-        super.onRestart()
+       restart=true;
+       super.onRestart()
+        Log.d("RESTART", "GO")
     }
 
     override fun onResume() {
         super.onResume()
+        if(restart){
+            navController.navigate(lastDestinationId)
+         restart=false;
+        }
         navController.addOnDestinationChangedListener(listener)
     }
 
@@ -234,6 +242,13 @@ class MainActivity : BaseActivity(R.layout.activity_main), StoreDocumentView {
         lastDestinationId = navController.currentDestination!!.id
         navController.removeOnDestinationChangedListener(listener)
         super.onPause()
+    }
+
+
+    private fun refreshCurrentFragment(){
+        val id = navController.currentDestination?.id
+        navController.popBackStack(id!!, true)
+        navController.navigate(id)
     }
 
     override fun storeDocumentSuccess(data: BaseModel) {
