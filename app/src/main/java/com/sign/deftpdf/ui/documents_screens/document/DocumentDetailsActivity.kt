@@ -19,10 +19,13 @@ import com.sign.deftpdf.model.document.DocumentModel
 import com.sign.deftpdf.model.documents.DocumentsData
 import com.sign.deftpdf.ui.documents_screens.DocumentsDeletePresenter
 import com.sign.deftpdf.ui.documents_screens.DocumentsUpdatePresenter
+import com.sign.deftpdf.ui.documents_screens.OnDocumentDetailListener
 import com.sign.deftpdf.ui.documents_screens.delete.DeleteDocumentDialog
 import com.sign.deftpdf.ui.documents_screens.rename.RenameDocumentDialog
 import com.sign.deftpdf.util.Util
 import okhttp3.MultipartBody
+import java.text.SimpleDateFormat
+import java.util.*
 
 class DocumentDetailsActivity : BaseActivity(R.layout.activity_document_details), GetDocumentView {
 
@@ -30,6 +33,10 @@ class DocumentDetailsActivity : BaseActivity(R.layout.activity_document_details)
     val presenter = GetDocumentPresenter(this)
     lateinit var data: DocumentData
     lateinit var inflater: LayoutInflater
+
+    companion object{
+        lateinit var listener: OnDocumentDetailListener
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +47,7 @@ class DocumentDetailsActivity : BaseActivity(R.layout.activity_document_details)
         val data: DocumentsData = intent.getSerializableExtra("document") as DocumentsData
 
         presenter.sendResponse(DeftApp.user.apiToken.toString(), data.id.toString())
+        binding.backBtn.setOnClickListener { finish() }
     }
 
     override fun startLoader() {
@@ -91,6 +99,7 @@ deleteDocument()
         val updatePresenter = DocumentsUpdatePresenter(this@DocumentDetailsActivity)
         updatePresenter.attachView(object : BaseModelView {
             override fun requestSuccess(data: BaseModel) {
+                listener.documentUpdate(newName)
                 binding.textName.text = newName
             }
         })
@@ -114,6 +123,7 @@ deleteDocument()
         val deletePresenter = DocumentsDeletePresenter(this@DocumentDetailsActivity)
         deletePresenter.attachView(object : BaseModelView {
             override fun requestSuccess(data: BaseModel) {
+                listener.documentDeleted()
                 finish()
             }
         })
@@ -138,9 +148,17 @@ deleteDocument()
                     val name: TextView = view.findViewById(R.id.document_name)
                     val date: TextView = view.findViewById(R.id.document_date)
 
+                    val calendar = Calendar.getInstance()
+                    val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+                    sdf.timeZone = TimeZone.getTimeZone("UTC")
+                    calendar.time = sdf.parse(data.updatedAt)
+
+                    sdf.timeZone = TimeZone.getDefault()
+                    val dateText = sdf.format(calendar.time)
+
                     image.text = activities.shareEmail?.get(0).toString()
                     name.text = activities.shareEmail
-                    date.text = activities.createdAt
+                    date.text = dateText
                 }
             }
         }

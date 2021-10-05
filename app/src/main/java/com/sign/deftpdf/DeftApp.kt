@@ -1,6 +1,7 @@
 package com.sign.deftpdf
 
 import android.app.Application
+import com.google.firebase.FirebaseApp
 import com.sign.deftpdf.model.user.UserData
 import com.sign.deftpdf.util.Util
 
@@ -14,5 +15,10 @@ class DeftApp : Application() {
         var filterTypeDocuments = Util.FILTER_MONTH
         var sortTypeLibrary = Util.SORT_DESC
         var filterTypeLibrary = Util.FILTER_MONTH
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+        FirebaseApp.initializeApp(this)
     }
 }

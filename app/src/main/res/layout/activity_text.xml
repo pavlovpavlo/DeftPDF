@@ -36,11 +36,12 @@
         <EditText
             android:id="@+id/editText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:background="@android:color/transparent"
             android:ems="10"
+            android:gravity="top"
             android:textCursorDrawable="@null"
             android:hint="Enter text..."
             android:inputType="textMultiLine|textPersonName|textImeMultiLine"
@@ -63,7 +64,7 @@
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:onClick="onClick"
-            app:srcCompat="@drawable/ic_color_1" />
+            app:srcCompat="@drawable/ic_color_checked" />
 
         <View
             android:id="@+id/view"
@@ -78,7 +79,7 @@
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:onClick="onClick"
-            app:srcCompat="@drawable/ic_color_2" />
+            app:srcCompat="@drawable/ic_color_unchecked_main" />
 
         <View
             android:id="@+id/view2"
@@ -93,7 +94,7 @@
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:onClick="onClick"
-            app:srcCompat="@drawable/ic_color_3" />
+            app:srcCompat="@drawable/ic_color_unchecked_red" />
     </LinearLayout>
 
     <com.google.android.material.tabs.TabLayout

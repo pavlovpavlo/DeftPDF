@@ -38,6 +38,10 @@ public class TextActivity extends AppCompatActivity implements View.OnClickListe
     private EditText text_edit;
     private RecyclerView history_list;
     private TabLayout tableLayout;
+    private ImageButton lastActiveTab;
+    private ImageButton imageButtonColor1;
+    private ImageButton imageButtonColor2;
+    private ImageButton imageButtonColor3;
     private ImageButton btn_close;
     private ImageButton btn_save;
     private ImageButton btn_open_k;
@@ -59,6 +63,10 @@ public class TextActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initView() {
+        imageButtonColor3 = findViewById(R.id.imageButtonColor3);
+        imageButtonColor2 = findViewById(R.id.imageButtonColor2);
+        imageButtonColor1 = findViewById(R.id.imageButtonColor1);
+        lastActiveTab = imageButtonColor1;
         history_list = findViewById(R.id.history_list);
         history_list.setVisibility(View.GONE);
         textTitle = findViewById(R.id.textTitle);
@@ -117,12 +125,14 @@ public class TextActivity extends AppCompatActivity implements View.OnClickListe
             finish();
         });
         btn_save.setOnClickListener(view -> {
-            ModelArrayList.add(text_edit.getText().toString());
-            saveTextBd();
-            Bitmap bitmap = textAsBitmap(text_edit.getText().toString(),
-                    text_edit.getTextSize(), text_edit.getCurrentTextColor());
-            listener.saveImageBitmap(bitmap);
-            finish();
+            if(text_edit.getText().toString().trim().length()>0) {
+                ModelArrayList.add(text_edit.getText().toString());
+                saveTextBd();
+                Bitmap bitmap = textAsBitmap(text_edit.getText().toString(),
+                        text_edit.getTextSize(), text_edit.getCurrentTextColor());
+                listener.saveImageBitmap(bitmap);
+                finish();
+            }
         });
 
         btn_open_k.setOnClickListener(v -> {
@@ -192,9 +202,9 @@ public class TextActivity extends AppCompatActivity implements View.OnClickListe
                 resetColorItem();
                 textFormat1.setTextColor(Color.parseColor("#7C4DFF"));
                 //SingletonClassApp.getInstance().set_format = 1;
-                text_edit.setText(DeftApp.user.getName());
-
-
+                if (DeftApp.user != null && DeftApp.user.getName() != null)
+                    text_edit.setText(text_edit.getText() + " " +DeftApp.user.getName());
+                text_edit.setSelection(text_edit.getText().length());
 
                 break;
             }
@@ -202,34 +212,75 @@ public class TextActivity extends AppCompatActivity implements View.OnClickListe
                 resetColorItem();
                 textFormat2.setTextColor(Color.parseColor("#7C4DFF"));
                 //      SingletonClassApp.getInstance().set_format=2;
-                text_edit.setText(DeftApp.user.getName());
+                if (DeftApp.user != null && DeftApp.user.getName() != null)
+                    text_edit.setText(text_edit.getText() + " " +DeftApp.user.getName());
+                text_edit.setSelection(text_edit.getText().length());
                 break;
             }
             case R.id.textFormat3: {
                 resetColorItem();
                 textFormat3.setTextColor(Color.parseColor("#7C4DFF"));
                 //     SingletonClassApp.getInstance().set_format=3;
-                text_edit.setText(DeftApp.user.getEmail());
+                if (DeftApp.user != null && DeftApp.user.getEmail() != null)
+                    text_edit.setText(text_edit.getText() + " " +DeftApp.user.getEmail());
+                text_edit.setSelection(text_edit.getText().length());
                 break;
             }
             case R.id.textFormat4: {
                 resetColorItem();
                 textFormat4.setTextColor(Color.parseColor("#7C4DFF"));
                 //     SingletonClassApp.getInstance().set_format=4;
-                text_edit.setText(DeftApp.user.getRole());
+                if (DeftApp.user != null && DeftApp.user.getRole() != null)
+                    text_edit.setText(text_edit.getText() + " " +DeftApp.user.getRole());
+                text_edit.setSelection(text_edit.getText().length());
                 break;
             }
 
             case R.id.imageButtonColor1: {
                 setColor("#323232");
+                setColorTab(lastActiveTab.getId(), false);
+                lastActiveTab = (ImageButton) view;
+                setColorTab(lastActiveTab.getId(), true);
                 break;
             }
             case R.id.imageButtonColor2: {
                 setColor("#7C4DFF");
+                setColorTab(lastActiveTab.getId(), false);
+                lastActiveTab = (ImageButton) view;
+                setColorTab(lastActiveTab.getId(), true);
                 break;
             }
             case R.id.imageButtonColor3: {
                 setColor("#EE4242");
+                setColorTab(lastActiveTab.getId(), false);
+                lastActiveTab = (ImageButton) view;
+                setColorTab(lastActiveTab.getId(), true);
+                break;
+            }
+        }
+    }
+
+    private void setColorTab(int id, boolean isSelected){
+        switch (id) {
+            case R.id.imageButtonColor1: {
+                if(isSelected)
+                imageButtonColor1.setImageResource(R.drawable.ic_color_checked);
+                else
+                    imageButtonColor1.setImageResource(R.drawable.ic_color_unchecked);
+                break;
+            }
+            case R.id.imageButtonColor2: {
+                if(isSelected)
+                    imageButtonColor2.setImageResource(R.drawable.ic_color_checked_main);
+                else
+                    imageButtonColor2.setImageResource(R.drawable.ic_color_unchecked_main);
+                break;
+            }
+            case R.id.imageButtonColor3: {
+                if(isSelected)
+                    imageButtonColor3.setImageResource(R.drawable.ic_color_checked_red);
+                else
+                    imageButtonColor3.setImageResource(R.drawable.ic_color_unchecked_red);
                 break;
             }
         }

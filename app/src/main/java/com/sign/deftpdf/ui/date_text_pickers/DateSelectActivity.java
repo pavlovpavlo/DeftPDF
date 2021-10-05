@@ -38,6 +38,10 @@ public class DateSelectActivity extends AppCompatActivity implements View.OnClic
     private ImageButton btn_close;
     private ImageButton btn_save;
     private ImageButton btn_open_k;
+    private ImageButton lastActiveTab;
+    private ImageButton imageButtonColor1;
+    private ImageButton imageButtonColor2;
+    private ImageButton imageButtonColor3;
     public static OnDrawSaveListener listener;
     DatePicker datePicker1;
     SimpleDateFormat format;
@@ -52,6 +56,10 @@ public class DateSelectActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void initView() {
+        imageButtonColor3 = findViewById(R.id.imageButtonColor3);
+        imageButtonColor2 = findViewById(R.id.imageButtonColor2);
+        imageButtonColor1 = findViewById(R.id.imageButtonColor1);
+        lastActiveTab = imageButtonColor1;
         btn_close=findViewById(R.id.imageButton);
         btn_save=findViewById(R.id.imageButton2);
         btn_open_k=findViewById(R.id.imageButton3);
@@ -196,6 +204,32 @@ public class DateSelectActivity extends AppCompatActivity implements View.OnClic
         return setText;
     }
 
+    private void setColorTab(int id, boolean isSelected){
+        switch (id) {
+            case R.id.imageButtonColor1: {
+                if(isSelected)
+                    imageButtonColor1.setImageResource(R.drawable.ic_color_checked);
+                else
+                    imageButtonColor1.setImageResource(R.drawable.ic_color_unchecked);
+                break;
+            }
+            case R.id.imageButtonColor2: {
+                if(isSelected)
+                    imageButtonColor2.setImageResource(R.drawable.ic_color_checked_main);
+                else
+                    imageButtonColor2.setImageResource(R.drawable.ic_color_unchecked_main);
+                break;
+            }
+            case R.id.imageButtonColor3: {
+                if(isSelected)
+                    imageButtonColor3.setImageResource(R.drawable.ic_color_checked_red);
+                else
+                    imageButtonColor3.setImageResource(R.drawable.ic_color_unchecked_red);
+                break;
+            }
+        }
+    }
+
      private void setColor(String color){
         text_date_main.setTextColor(Color.parseColor(color));
      }
@@ -249,14 +283,23 @@ public class DateSelectActivity extends AppCompatActivity implements View.OnClic
             }
             case R.id.imageButtonColor1: {
                 setColor("#323232");
+                setColorTab(lastActiveTab.getId(), false);
+                lastActiveTab = (ImageButton) view;
+                setColorTab(lastActiveTab.getId(), true);
                 break;
             }
             case R.id.imageButtonColor2: {
                 setColor("#7C4DFF");
+                setColorTab(lastActiveTab.getId(), false);
+                lastActiveTab = (ImageButton) view;
+                setColorTab(lastActiveTab.getId(), true);
                 break;
             }
             case R.id.imageButtonColor3: {
                 setColor("#EE4242");
+                setColorTab(lastActiveTab.getId(), false);
+                lastActiveTab = (ImageButton) view;
+                setColorTab(lastActiveTab.getId(), true);
                 break;
             }
         }

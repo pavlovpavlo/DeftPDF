@@ -2,7 +2,7 @@ package com.sign.deftpdf.base
 
 public open class BasePresenter(private var basicView: BasicView) : BasicView {
     override fun showError(message: String) {
-        basicView.showError(message)
+        basicView.showError(message.replace("[","").replace("]",""))
     }
 
     override fun showInternetError(onRefreshResponse: () -> Unit) {

@@ -1,6 +1,7 @@
 package com.sign.deftpdf.api
 
 import com.sign.deftpdf.model.BaseModel
+import com.sign.deftpdf.model.SignatureBody
 import com.sign.deftpdf.model.document.DocumentModel
 import com.sign.deftpdf.model.documents.DocumentsModel
 import com.sign.deftpdf.model.faq.FaqModel
@@ -11,6 +12,7 @@ import com.sign.deftpdf.model.sign_link.SignLinkModel
 import com.sign.deftpdf.ui.main.GetUserView
 import io.reactivex.Observable
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.http.*
 
 interface ApiService {
@@ -125,24 +127,26 @@ interface ApiService {
     @POST("user/sign-initial/update/{document_id}")
     fun updateSignature(
         @Path(value = "document_id", encoded = true) documentId: String,
-        @Query("api_token") token: String,
         @Part image: MultipartBody.Part?,
-        @Query("type") type: String,
-        @Query("string_signature") signSignature: String?
+        @PartMap params:MutableMap <String, @JvmSuppressWildcards RequestBody>
     ): Observable<UserModel>
 
     @Multipart
     @Headers("Accept: application/json")
     @POST("user/sign-initial/store")
     fun storeSignature(
-        @Query("api_token") token: String,
         @Part image: MultipartBody.Part?,
-        @Query("type") type: String,
-        @Query("string_signature") signSignature: String?
+        @PartMap params:MutableMap<String, @JvmSuppressWildcards RequestBody>
     ): Observable<UserModel>
 
     @Headers("Accept: application/json")
     @GET("user/notification")
     fun getNotifications(@Query("api_token") token: String): Observable<NotificationsModel>
+
+    @Headers("Accept: application/json")
+    @POST("subscription/cancel")
+    fun cancelSubscription(
+        @Query("api_token") token: String
+    ): Observable<UserModel>
 
 }

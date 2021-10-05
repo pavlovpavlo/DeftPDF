@@ -70,6 +70,8 @@
         android:drawablePadding="8dp"
         android:fontFamily="@font/roboto_reg"
         android:textCursorDrawable="@null"
+        android:maxLines="1"
+        android:inputType="text"
         android:focusedByDefault="false"
         android:hint="Search documents"
         android:paddingStart="10dp"

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "100923546139",
+    "project_id": "deftapp-99c1c",
+    "storage_bucket": "deftapp-99c1c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:100923546139:android:abff9f95d4400cfdb2b6be",
+        "android_client_info": {
+          "package_name": "com.sign.deftpdf"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "100923546139-qj8t7cbv96ud4nfqaa4bv3a5qcpsuqg8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBttN75hj9DUcL9XfwCR4uw0PtEFlk3oSI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "100923546139-qj8t7cbv96ud4nfqaa4bv3a5qcpsuqg8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

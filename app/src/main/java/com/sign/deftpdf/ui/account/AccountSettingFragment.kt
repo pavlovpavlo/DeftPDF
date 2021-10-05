@@ -24,6 +24,7 @@ import com.sign.deftpdf.ui.main.GetUserPresenter
 import com.sign.deftpdf.ui.main.GetUserView
 import com.sign.deftpdf.ui.main.MainActivity
 import com.sign.deftpdf.util.Util
+import java.text.SimpleDateFormat
 import java.util.*
 
 class AccountSettingFragment : Fragment(R.layout.fragment_account_settings), GetUserView {
@@ -48,6 +49,10 @@ class AccountSettingFragment : Fragment(R.layout.fragment_account_settings), Get
         super.onViewCreated(view, savedInstanceState)
         thisView = view
         initListeners()
+        sendRequest()
+    }
+
+    private fun sendRequest(){
         val presenter = GetUserPresenter(activity)
         presenter.attachView(this)
         presenter.sendResponse(DeftApp.user.apiToken.toString())
@@ -61,6 +66,7 @@ class AccountSettingFragment : Fragment(R.layout.fragment_account_settings), Get
                 DrawActivity.listener = object : OnDrawSaveListener {
                     override fun saveImageBitmap(bitmap: Bitmap) {
                         signImage.setImageBitmap(bitmap)
+                        initData()
                     }
 
                     override fun saveImageViewHolder(viewHolder: SignatureUtils.ViewHolder) {
@@ -74,6 +80,7 @@ class AccountSettingFragment : Fragment(R.layout.fragment_account_settings), Get
                 DrawActivity.listener = object : OnDrawSaveListener {
                     override fun saveImageBitmap(bitmap: Bitmap) {
                         initImage.setImageBitmap(bitmap)
+                        initData()
                     }
 
                     override fun saveImageViewHolder(viewHolder: SignatureUtils.ViewHolder) {
@@ -97,8 +104,16 @@ class AccountSettingFragment : Fragment(R.layout.fragment_account_settings), Get
                 val userInitials = thisView.findViewById<TextView>(R.id.document_name)
                 val userDate = thisView.findViewById<TextView>(R.id.document_date)
 
+                val calendar = Calendar.getInstance()
+                val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+                sdf.timeZone = TimeZone.getTimeZone("UTC")
+                calendar.time = sdf.parse(createdAt)
+
+                sdf.timeZone = TimeZone.getDefault()
+                val date = sdf.format(calendar.time)
+
                 userInitials.text = email
-                userDate.text = createdAt
+                userDate.text = date
                 userInitialsImage.text = Util.getInitialsLetter().toUpperCase(Locale.getDefault())
 
                 if (sign?.url.isNullOrEmpty()) {
@@ -113,7 +128,7 @@ class AccountSettingFragment : Fragment(R.layout.fragment_account_settings), Get
                         DrawActivity.isAccountScreen = true
                         DrawActivity.listener = object : OnDrawSaveListener {
                             override fun saveImageBitmap(bitmap: Bitmap) {
-                                signImage.setImageBitmap(bitmap)
+                                initData()
                             }
 
                             override fun saveImageViewHolder(viewHolder: SignatureUtils.ViewHolder) {
@@ -139,7 +154,7 @@ class AccountSettingFragment : Fragment(R.layout.fragment_account_settings), Get
                         DrawActivity.isAccountScreen = true
                         DrawActivity.listener = object : OnDrawSaveListener {
                             override fun saveImageBitmap(bitmap: Bitmap) {
-                                initImage.setImageBitmap(bitmap)
+                                initData()
                             }
 
                             override fun saveImageViewHolder(viewHolder: SignatureUtils.ViewHolder) {

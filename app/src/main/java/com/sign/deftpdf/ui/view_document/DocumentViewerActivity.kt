@@ -151,10 +151,22 @@ class DocumentViewerActivity : BaseActivity(R.layout.activity_document_viewer), 
                 if (!file.exists()) {
                     file.mkdir()
                 }
-                val fileName: String = this@DocumentViewerActivity.data.originalName?.replace(".pdf", "") + ".pdf"
+                val fileName: String =
+                    this@DocumentViewerActivity.data.originalName?.replace(".pdf", "") + ".pdf"
                 val pdfFile = File(file, fileName)
                 if (pdfFile.exists())
-                pdfFile.delete()
+                    pdfFile.delete()
+
+                if (DeftApp.user.subscription?.type == "premium" || DeftApp.user.subscription?.type == "business") {
+                    if (DeftApp.user.subscription?.limitPaidDocuments != null)
+                        DeftApp.user.subscription?.limitPaidDocuments =
+                            DeftApp.user.subscription?.limitPaidDocuments!! - 1
+                } else {
+                    if (DeftApp.user.subscription?.freeDocument != null)
+                        DeftApp.user.subscription?.freeDocument =
+                            DeftApp.user.subscription?.freeDocument!! - 1
+                }
+
 
                 finish()
             }
@@ -181,7 +193,14 @@ class DocumentViewerActivity : BaseActivity(R.layout.activity_document_viewer), 
             title.text = data.originalName
             backBtn.setOnClickListener { finish() }
             signDocument.setOnClickListener { showSignDialog() }
-            save.setOnClickListener { showSaveDialog() }
+            save.setOnClickListener {
+                DeftApp.user.subscription?.let {
+                    if ((it.status && it.limitPaidDocuments != 0) || (!it.status && it.freeDocument != 0))
+                        showSaveDialog()
+                    else
+                        showError("No free credits left. Please upgrade your account")
+                }
+            }
             freestyle.setOnClickListener {
                 DrawActivity.isFreeStyle = true
                 DrawActivity.listener = this@DocumentViewerActivity
@@ -284,7 +303,8 @@ class DocumentViewerActivity : BaseActivity(R.layout.activity_document_viewer), 
         val view: View = baseSettingsDialog(R.layout.dialog_save)
         val signMe: LinearLayout = view.findViewById(R.id.sign_me)
         val signNotMe: LinearLayout = view.findViewById(R.id.sign_not_me)
-        val fileName: String = this@DocumentViewerActivity.data.originalName?.replace(".pdf", "") + ".pdf"
+        val fileName: String =
+            this@DocumentViewerActivity.data.originalName?.replace(".pdf", "") + ".pdf"
         signMe.setOnClickListener {
             status = "signed"
             val task = PDSSaveAsPDFAsyncTask(this, fileName)
@@ -356,7 +376,7 @@ class DocumentViewerActivity : BaseActivity(R.layout.activity_document_viewer), 
     }
 
     private fun OpenPDFViewer(pdfData: Uri?) {
-       stopLoader()
+        stopLoader()
         try {
             val document = PDSPDFDocument(this, pdfData)
             document.open()

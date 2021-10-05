@@ -6,13 +6,11 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
@@ -25,11 +23,9 @@ import com.sign.deftpdf.base.BaseActivity
 import com.sign.deftpdf.databinding.ActivityMainBinding
 import com.sign.deftpdf.model.BaseModel
 import com.sign.deftpdf.ui.check_auth.CheckAuthActivity
-import com.sign.deftpdf.ui.documents_screens.documents.DocumentsFragment
-import com.sign.deftpdf.ui.documents_screens.home.HomeFragment
-import com.sign.deftpdf.ui.documents_screens.library.LibraryFragment
 import com.sign.deftpdf.ui.main.menu.MenuAdapter
 import com.sign.deftpdf.ui.main.menu.Top
+import com.sign.deftpdf.util.FileUtil
 import com.sign.deftpdf.util.LocalSharedUtil
 import com.sign.deftpdf.util.Util
 import okhttp3.MediaType
@@ -44,37 +40,33 @@ class MainActivity : BaseActivity(R.layout.activity_main), StoreDocumentView {
     lateinit var mDrawer: DrawerLayout
     private lateinit var settingsBtn: AppCompatButton
     private lateinit var navController: NavController
+    private var lastDestinationId : Int = R.id.navigation_home
     private val presenter: StoreDocumentPresenter = StoreDocumentPresenter(this)
-    private val listener = NavController.OnDestinationChangedListener { controller, destination, arguments ->
-        if (destination.id == R.id.navigation_home
+    private val listener =
+        NavController.OnDestinationChangedListener { controller, destination, arguments ->
+            if (destination.id == R.id.navigation_home
                 || destination.id == R.id.navigation_documents
-                || destination.id == R.id.navigation_library) {
-            binding.addDocument.visibility = View.VISIBLE
-        } else {
-            binding.addDocument.visibility = View.GONE
+                || destination.id == R.id.navigation_library
+            ) {
+                binding.addDocument.visibility = View.VISIBLE
+            } else {
+                binding.addDocument.visibility = View.GONE
+            }
         }
-    }
 
-    override fun onResume() {
-        super.onResume()
-        navController.addOnDestinationChangedListener(listener)
-    }
 
-    override fun onPause() {
-        navController.removeOnDestinationChangedListener(listener)
-        super.onPause()
-    }
 
     internal val binding by viewBinding(ActivityMainBinding::bind)
-    private val pickPDF = registerForActivityResult(ActivityResultContracts.GetContent()) { contentUri ->
-        if (contentUri != null)
-            loadPdfToServer(contentUri)
-    }
+    private val pickPDF =
+        registerForActivityResult(ActivityResultContracts.GetContent()) { contentUri ->
+            if (contentUri != null)
+                loadPdfToServer(contentUri)
+        }
 
     var recycler_menu: RecyclerView? = null
     var menuAdapter: MenuAdapter? = null
     val list_menu: ArrayList<Top> =
-            ArrayList<Top>()
+        ArrayList<Top>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -85,19 +77,20 @@ class MainActivity : BaseActivity(R.layout.activity_main), StoreDocumentView {
 
         initMenu()
         initListeners()
-        Log.d("Load-Start-Activity","Load")
+        Log.d("Load-Start-Activity", "Load")
     }
 
     override fun startLoader() {
-        Log.d("Load-Start","Load")
-        try{
-        findViewById<View>(R.id.progress_main).visibility = View.VISIBLE}catch (e:Exception){
+        Log.d("Load-Start", "Load")
+        try {
+            findViewById<View>(R.id.progress_main).visibility = View.VISIBLE
+        } catch (e: Exception) {
             //not cast
         }
     }
 
     override fun stopLoader() {
-        Log.d("Load-Stop","Load")
+        Log.d("Load-Stop", "Load")
         findViewById<View>(R.id.progress_main).visibility = View.GONE
     }
 
@@ -114,8 +107,8 @@ class MainActivity : BaseActivity(R.layout.activity_main), StoreDocumentView {
 
         recycler_menu!!.layoutManager = GridLayoutManager(this, 1)
         menuAdapter = MenuAdapter(
-                list_menu as ArrayList<Top>?,
-                this
+            list_menu as ArrayList<Top>?,
+            this
         )
         recycler_menu!!.adapter = menuAdapter
         menuAdapter!!.setOnItemClickListener(onResultItemClick)
@@ -140,8 +133,8 @@ class MainActivity : BaseActivity(R.layout.activity_main), StoreDocumentView {
 
 
         menuAdapter = MenuAdapter(
-                list_menu as ArrayList<Top?>?,
-                this
+            list_menu as ArrayList<Top?>?,
+            this
         )
         signOut.setOnClickListener {
             LocalSharedUtil().setTokenParameter("", this)
@@ -165,7 +158,7 @@ class MainActivity : BaseActivity(R.layout.activity_main), StoreDocumentView {
 
     private fun loadPdfToServer(uri: Uri) {
         presenter.attachView(this)
-        val file: File = Util.getFile(this, uri)
+        val file: File = FileUtil.from(this, uri)
 
         val requestFile = RequestBody.create(MediaType.parse("file"), file)
 
@@ -174,45 +167,75 @@ class MainActivity : BaseActivity(R.layout.activity_main), StoreDocumentView {
     }
 
     private val onResultItemClick: MenuAdapter.ClickListener =
-            object : MenuAdapter.ClickListener {
-                override fun onItemClick(position: Int, v: View?) {
-                    if (mDrawer.isDrawerOpen(GravityCompat.START)) {
-                        mDrawer.closeDrawers()
+        object : MenuAdapter.ClickListener {
+            override fun onItemClick(position: Int, v: View?) {
+                if (mDrawer.isDrawerOpen(GravityCompat.START)) {
+                    mDrawer.closeDrawers()
+                }
+                when (position) {
+                    0 -> {
+                        navController.navigate(R.id.navigation_account_setting)
                     }
-                    when (position) {
-                        0 -> {
-                            navController.navigate(R.id.navigation_account_setting)
+                    1 -> {
+                        try {
+                            startActivity(
+                                Intent(
+                                    Intent.ACTION_VIEW,
+                                    Uri.parse("market://details?id=$packageName")
+                                )
+                            )
+                        } catch (e: ActivityNotFoundException) {
+                            startActivity(
+                                Intent(
+                                    Intent.ACTION_VIEW,
+                                    Uri.parse("https://play.google.com/store/apps/details?id=$packageName")
+                                )
+                            )
                         }
-                        1 -> {
-                            try {
-                                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$packageName")))
-                            } catch (e: ActivityNotFoundException) {
-                                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=$packageName")))
-                            }
-                        }
-                        2 -> {
-                            navController.navigate(R.id.navigation_help)
-                        }
-                        3 -> {
-                            val intent = Intent(Intent.ACTION_SENDTO)
-                            intent.data = Uri.parse("mailto:")
-                            intent.putExtra(Intent.EXTRA_EMAIL, DeftApp.user.email)
-                            if (intent.resolveActivity(packageManager) != null) {
-                                startActivity(intent)
-                            }
-                        }
+                    }
+                    2 -> {
+                        navController.navigate(R.id.navigation_help)
+                    }
+                    3 -> {
+                        val selectorIntent = Intent(Intent.ACTION_SENDTO)
+                        selectorIntent.data = Uri.parse("mailto:")
+
+                        val emailIntent = Intent(Intent.ACTION_SEND)
+                        emailIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf(DeftApp.user.email))
+                        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Contact Support")
+                        emailIntent.selector = selectorIntent
+
+                        startActivity(
+                            Intent.createChooser(
+                                emailIntent,
+                                "Send email..."
+                            )
+                        )
+
                     }
                 }
-
-                override fun onItemLongClick(position: Int, v: View?) {}
             }
 
-    override fun onRestart() {
-        super.onRestart()
-        navController.currentDestination?.id?.let {
-            navController.navigate(it)
+            override fun onItemLongClick(position: Int, v: View?) {}
         }
+
+
+    override fun onRestart() {
+        navController.navigate(lastDestinationId)
+        super.onRestart()
     }
+
+    override fun onResume() {
+        super.onResume()
+        navController.addOnDestinationChangedListener(listener)
+    }
+
+    override fun onPause() {
+        lastDestinationId = navController.currentDestination!!.id
+        navController.removeOnDestinationChangedListener(listener)
+        super.onPause()
+    }
+
     override fun storeDocumentSuccess(data: BaseModel) {
         when (navController.currentDestination?.id) {
             R.id.navigation_documents -> {

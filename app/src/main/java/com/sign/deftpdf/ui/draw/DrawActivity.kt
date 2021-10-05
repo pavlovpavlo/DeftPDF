@@ -155,8 +155,9 @@ class DrawActivity : BaseActivity(R.layout.activity_draw) {
                 sendRequestSave(DeftApp.user.apiToken.toString(), body,
                     "sign", null, object : GetUserView {
                         override fun getUserSuccess(data: UserModel) {
-                            listener.saveImageBitmap(bitmap)
                             DeftApp.user.sign = data.data?.sign
+                            listener.saveImageBitmap(bitmap)
+
                             finish()
                         }
                     })
@@ -165,8 +166,8 @@ class DrawActivity : BaseActivity(R.layout.activity_draw) {
                     DeftApp.user.initials!!.id.toString(), body,
                     "sign", null, object : GetUserView {
                         override fun getUserSuccess(data: UserModel) {
-                            listener.saveImageBitmap(bitmap)
                             DeftApp.user.sign = data.data?.sign
+                            listener.saveImageBitmap(bitmap)
                             finish()
                         }
                     })
@@ -176,8 +177,9 @@ class DrawActivity : BaseActivity(R.layout.activity_draw) {
                 sendRequestSave(DeftApp.user.apiToken.toString(), body,
                     "initials", null, object : GetUserView {
                         override fun getUserSuccess(data: UserModel) {
-                            listener.saveImageBitmap(bitmap)
                             DeftApp.user.initials = data.data?.initials
+                            listener.saveImageBitmap(bitmap)
+
                             finish()
                         }
                     })
@@ -186,8 +188,9 @@ class DrawActivity : BaseActivity(R.layout.activity_draw) {
                     DeftApp.user.initials!!.id.toString(), body,
                     "initials", null, object : GetUserView {
                         override fun getUserSuccess(data: UserModel) {
-                            listener.saveImageBitmap(bitmap)
                             DeftApp.user.initials = data.data?.initials
+                            listener.saveImageBitmap(bitmap)
+
                             finish()
                         }
                     })
@@ -203,11 +206,12 @@ class DrawActivity : BaseActivity(R.layout.activity_draw) {
                 sendRequestSave(DeftApp.user.apiToken.toString(), body,
                     "sign", Gson().toJson(viewHolder), object : GetUserView {
                         override fun getUserSuccess(data: UserModel) {
+                            DeftApp.user.sign = data.data?.sign
                             if (isAccountScreen)
                                 listener.saveImageBitmap(bitmap)
                             else
                                 listener.saveImageViewHolder(viewHolder)
-                            DeftApp.user.sign = data.data?.sign
+
                             finish()
                         }
                     })
@@ -216,11 +220,12 @@ class DrawActivity : BaseActivity(R.layout.activity_draw) {
                     DeftApp.user.sign!!.id.toString(), body,
                     "sign", Gson().toJson(viewHolder), object : GetUserView {
                         override fun getUserSuccess(data: UserModel) {
+                            DeftApp.user.sign = data.data?.sign
                             if (isAccountScreen)
                                 listener.saveImageBitmap(bitmap)
                             else
                                 listener.saveImageViewHolder(viewHolder)
-                            DeftApp.user.sign = data.data?.sign
+
                             finish()
                         }
                     })
@@ -230,11 +235,12 @@ class DrawActivity : BaseActivity(R.layout.activity_draw) {
                 sendRequestSave(DeftApp.user.apiToken.toString(), body,
                     "initials", Gson().toJson(viewHolder), object : GetUserView {
                         override fun getUserSuccess(data: UserModel) {
+                            DeftApp.user.initials = data.data?.initials
                             if (isAccountScreen)
                                 listener.saveImageBitmap(bitmap)
                             else
                                 listener.saveImageViewHolder(viewHolder)
-                            DeftApp.user.initials = data.data?.initials
+
                             finish()
                         }
                     })
@@ -243,11 +249,11 @@ class DrawActivity : BaseActivity(R.layout.activity_draw) {
                     DeftApp.user.initials!!.id.toString(), body,
                     "initials", Gson().toJson(viewHolder), object : GetUserView {
                         override fun getUserSuccess(data: UserModel) {
+                            DeftApp.user.initials = data.data?.initials
                             if (isAccountScreen)
                                 listener.saveImageBitmap(bitmap)
                             else
                                 listener.saveImageViewHolder(viewHolder)
-                            DeftApp.user.initials = data.data?.initials
                             finish()
                         }
                     })

@@ -58,4 +58,7 @@ class UserData {
     @SerializedName("initials")
     var initials: UserSign? = null
 
+    @SerializedName("subscription")
+    var subscription: UserSubscription? = null
+
 }

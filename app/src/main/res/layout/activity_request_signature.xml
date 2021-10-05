@@ -42,6 +42,17 @@
         app:layout_constraintStart_toStartOf="@id/content_start"
         app:layout_constraintTop_toTopOf="@id/back_btn" />
 
+    <ImageButton
+        android:id="@+id/close_keyboard"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginEnd="16dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="@id/back_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/back_btn"
+        app:srcCompat="@drawable/ic_open_close_k" />
+
     <androidx.constraintlayout.helper.widget.Flow
         android:id="@+id/filter_flow"
         android:layout_width="0dp"
@@ -207,6 +218,7 @@
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
         android:textColor="#878787"
+        android:gravity="top|start"
         android:textCursorDrawable="@null"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@id/content_end"

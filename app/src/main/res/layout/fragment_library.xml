@@ -68,6 +68,8 @@
         android:background="@drawable/ic_search_edittext_bg"
         android:drawableStart="@drawable/ic_search"
         android:drawablePadding="8dp"
+        android:inputType="text"
+        android:maxLines="1"
         android:fontFamily="@font/roboto_reg"
         android:textCursorDrawable="@null"
         android:focusedByDefault="false"

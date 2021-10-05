@@ -16,8 +16,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DeftPDF"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.login.LoginWebViewActivity"
-            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.subscription.SubscriptionActivity"></activity>
+        <activity
+            android:name=".ui.login.LoginWebViewActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.date_text_pickers.TextActivity"
             android:screenOrientation="portrait"

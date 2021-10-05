@@ -13,6 +13,8 @@ import com.sign.deftpdf.ui.main.GetUserPresenter
 import com.sign.deftpdf.ui.main.GetUserView
 import com.sign.deftpdf.ui.main.MainActivity
 import com.sign.deftpdf.util.LocalSharedUtil
+import java.io.IOError
+import java.io.IOException
 
 class SplashActivity : BaseActivity(R.layout.activity_splash), GetUserView {
 

@@ -52,7 +52,7 @@ class LoginWebViewActivity : BaseActivity(R.layout.activity_login_web_view), Get
         binding.webview.webViewClient = object : WebViewClient() {
             override fun onPageFinished(view: WebView, url: String) {
                 stopLoader()
-                if (binding.webview.url == "https://pdf.webstaginghub.com/account#" || binding.webview.url == "https://pdf.webstaginghub.com/account") {
+                if (binding.webview.url!!.contains("https://pdf.webstaginghub.com/account")) {
                     binding.webview.evaluateJavascript(
                         "after_login_callback()",
                         ValueCallback<String?> { s ->

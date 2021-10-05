@@ -1,11 +1,13 @@
 package com.sign.deftpdf.ui.request_signature
 
+import android.app.Activity
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.os.Bundle
 import android.util.Patterns
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import android.widget.Toast
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -74,7 +76,24 @@ class RequestSignatureActivity : BaseActivity(R.layout.activity_request_signatur
             }
             backBtn.setOnClickListener { finish() }
 
+            closeKeyboard.setOnClickListener(View.OnClickListener { v: View? ->
+                hideKeyboard(
+                    this@RequestSignatureActivity
+                )
+            })
+
         }
+    }
+
+    private fun hideKeyboard(activity: Activity) {
+        val imm = activity.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+        //Find the currently focused view, so we can grab the correct window token from it.
+        var view = activity.currentFocus
+        //If no view currently has focus, create a new one, just so we can grab a window token from it
+        if (view == null) {
+            view = View(activity)
+        }
+        imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
     private fun defaultClickListener(){
@@ -119,7 +138,11 @@ class RequestSignatureActivity : BaseActivity(R.layout.activity_request_signatur
         val presenter = RequestSignatureEmailPresenter(this)
         presenter.attachView(object : BaseModelView {
             override fun requestSuccess(data: BaseModel) {
-                //finish()
+                Toast.makeText(
+                    this@RequestSignatureActivity,
+                    "Data has been successfully sent by email",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         })
         presenter.sendResponse(

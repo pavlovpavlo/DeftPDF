@@ -8,6 +8,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.sign.deftpdf.R
 import com.sign.deftpdf.model.notifications.NotificationData
+import java.text.SimpleDateFormat
+import java.util.*
 
 class NotificationsAdapter(private var mList: List<NotificationData>) : RecyclerView.Adapter<NotificationsAdapter.ViewHolder>() {
 
@@ -29,8 +31,16 @@ class NotificationsAdapter(private var mList: List<NotificationData>) : Recycler
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val documentData = mList[position]
 
+        val calendar = Calendar.getInstance()
+        val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+        sdf.timeZone = TimeZone.getTimeZone("UTC")
+        calendar.time = sdf.parse(documentData.updatedAt)
+
+        sdf.timeZone = TimeZone.getDefault()
+        val date = sdf.format(calendar.time)
+
         holder.documentName.text = documentData.notification
-        holder.documentDate.text = documentData.createdAt
+        holder.documentDate.text = date
     }
 
     fun setDocuments(list: List<NotificationData>) {

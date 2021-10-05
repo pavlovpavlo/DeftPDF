@@ -1,8 +1,11 @@
 package com.sign.deftpdf.ui.forgot
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Patterns
 import android.view.View
+import android.widget.Toast
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.sign.deftpdf.R
 import com.sign.deftpdf.base.BaseActivity
@@ -49,6 +52,7 @@ class ForgotPassActivity : BaseActivity(R.layout.activity_forgot_pass), ForgotPa
     }
 
     override fun requestSuccess(data: BaseModel) {
+        Toast.makeText(this, "Password reset instructions had been sent.", Toast.LENGTH_SHORT).show()
         finish()
     }
 

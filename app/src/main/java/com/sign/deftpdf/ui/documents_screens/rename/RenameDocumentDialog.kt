@@ -46,7 +46,11 @@ class RenameDocumentDialog : DialogFragment() {
 
         cancel.setOnClickListener { dismiss() }
         confirm.setOnClickListener {
-            confirmFunction.invoke(name.text.toString())
+            var nameEnd = name.text.toString()
+            if (nameEnd != null)
+                if (!nameEnd.contains(".pdf"))
+                    nameEnd += ".pdf"
+            confirmFunction.invoke(nameEnd)
             dismiss()
         }
         return view

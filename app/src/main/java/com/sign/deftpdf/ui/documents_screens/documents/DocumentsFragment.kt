@@ -50,7 +50,7 @@ class DocumentsFragment : BaseFragment(R.layout.fragment_document) , DocumentsVi
     private var adapter: DocumentsAdapter = DocumentsAdapter(listOf())
     private val currentDate: String =
             SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(
-                    Date()
+                Date()
             )
 
     override fun onAttach(context: Context) {
@@ -75,10 +75,12 @@ class DocumentsFragment : BaseFragment(R.layout.fragment_document) , DocumentsVi
     }
 
     private fun sendRequest() {
-        presenter.sendResponse(DeftApp.user.apiToken!!,
-                page.toString(), perPage.toString(),
-                Util.SORT_BY, DeftApp.sortTypeDocuments,
-                Util.calculateDate(DeftApp.filterTypeDocuments), currentDate, documentsStatus)
+        presenter.sendResponse(
+            DeftApp.user.apiToken!!,
+            page.toString(), perPage.toString(),
+            Util.SORT_BY, DeftApp.sortTypeDocuments,
+            Util.calculateDate(DeftApp.filterTypeDocuments), currentDate, documentsStatus
+        )
     }
 
     private fun showDetailDialog(position: Int) {
@@ -97,36 +99,56 @@ class DocumentsFragment : BaseFragment(R.layout.fragment_document) , DocumentsVi
         val signDocument: LinearLayout = view.findViewById(R.id.sign_document)
         val requestDocument: LinearLayout = view.findViewById(R.id.request_document)
 
+        val calendar = Calendar.getInstance()
+        val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+        sdf.timeZone = TimeZone.getTimeZone("UTC")
+        calendar.time = sdf.parse(data.updatedAt)
+
+        sdf.timeZone = TimeZone.getDefault()
+        val date = sdf.format(calendar.time)
+
         documentDetail.visibility = View.GONE
         documentName.text = data.originalName
-        documentDate.text = data.createdAt
-        documentImage.setImageResource(when (data.status) {
-            "original" -> {
-                R.drawable.ic_document_original
+        documentDate.text = date
+        documentImage.setImageResource(
+            when (data.status) {
+                "original" -> {
+                    R.drawable.ic_document_original
+                }
+                "signed" -> {
+                    R.drawable.ic_document_signed
+                }
+                "pending" -> {
+                    R.drawable.ic_document_pending
+                }
+                "draft" -> {
+                    R.drawable.ic_document_draft
+                }
+                else ->
+                    R.drawable.ic_document_original
             }
-            "signed" -> {
-                R.drawable.ic_document_signed
-            }
-            "pending" -> {
-                R.drawable.ic_document_pending
-            }
-            "draft" -> {
-                R.drawable.ic_document_draft
-            }
-            else ->
-                R.drawable.ic_document_original
-        })
+        )
 
         if (data.status == "signed" || data.status == "pending") {
             signDocument.visibility = View.GONE
             requestDocument.visibility = View.GONE
             sentToEmail.setOnClickListener {
-                val intent = Intent(Intent.ACTION_SENDTO)
+                val selectorIntent = Intent(Intent.ACTION_SENDTO)
+                selectorIntent.data = Uri.parse("mailto:")
+
+                val emailIntent = Intent(Intent.ACTION_SEND)
+                emailIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf(DeftApp.user.email))
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, data.originalName)
+                emailIntent.putExtra(Intent.EXTRA_TEXT, Util.DATA_URL+data.originalDocument)
+                emailIntent.selector = selectorIntent
+
+                activity.startActivity(Intent.createChooser(emailIntent, "Send email..."))
+                /*val intent = Intent(Intent.ACTION_SENDTO)
                 intent.data = Uri.parse("mailto:")
                 intent.putExtra(Intent.EXTRA_EMAIL, DeftApp.user.email)
                 if (intent.resolveActivity(activity.packageManager) != null) {
                     startActivity(intent)
-                }
+                }*/
                 dismissPopup()
             }
             export.setOnClickListener {
@@ -153,6 +175,19 @@ class DocumentsFragment : BaseFragment(R.layout.fragment_document) , DocumentsVi
         }
 
         details.setOnClickListener {
+            DocumentDetailsActivity.listener = object : OnDocumentDetailListener{
+                override fun documentDeleted() {
+                    list.removeAt(position)
+                    adapter.setDocuments(list)
+                    binding.count.text = list.size.toString()
+                }
+
+                override fun documentUpdate(newName: String) {
+                    list[position].originalName = newName
+                    adapter.notifyItemChanged(position)
+                }
+
+            }
             val intent = Intent(activity, DocumentDetailsActivity::class.java)
             intent.putExtra("document", data)
             startActivity(intent)
@@ -189,14 +224,17 @@ class DocumentsFragment : BaseFragment(R.layout.fragment_document) , DocumentsVi
             }
         })
         updatePresenter.sendResponse(
-                DeftApp.user.apiToken!!,
-                list[position].id.toString(),
-                multipartBody, null, newName)
+            DeftApp.user.apiToken!!,
+            list[position].id.toString(),
+            multipartBody, null, newName
+        )
     }
 
     private fun deleteDocument(position: Int) {
-        DeleteDocumentDialog.display(activity.supportFragmentManager,
-                list[position].originalName.toString()) {
+        DeleteDocumentDialog.display(
+            activity.supportFragmentManager,
+            list[position].originalName.toString()
+        ) {
             sendRequestDelete(position)
         }
     }
@@ -211,8 +249,9 @@ class DocumentsFragment : BaseFragment(R.layout.fragment_document) , DocumentsVi
             }
         })
         deletePresenter.sendResponse(
-                DeftApp.user.apiToken!!,
-                list[position].id.toString())
+            DeftApp.user.apiToken!!,
+            list[position].id.toString()
+        )
     }
 
     private fun initListeners() {
@@ -222,7 +261,12 @@ class DocumentsFragment : BaseFragment(R.layout.fragment_document) , DocumentsVi
             adapter.listener = this@DocumentsFragment
             documentsList.adapter = adapter
             searchEdit.addTextChangedListener(object : TextWatcher {
-                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
                 }
 
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
@@ -274,10 +318,11 @@ class DocumentsFragment : BaseFragment(R.layout.fragment_document) , DocumentsVi
             dismissPopup()
         }
         sortGroup.check(
-                if (DeftApp.sortTypeDocuments == Util.SORT_DESC)
-                    R.id.latest_sort
-                else
-                    R.id.oldest_sort)
+            if (DeftApp.sortTypeDocuments == Util.SORT_DESC)
+                R.id.latest_sort
+            else
+                R.id.oldest_sort
+        )
 
         sortGroup.setOnCheckedChangeListener { group, checkedId ->
             DeftApp.sortTypeDocuments = if (checkedId == R.id.latest_sort)
@@ -301,10 +346,11 @@ class DocumentsFragment : BaseFragment(R.layout.fragment_document) , DocumentsVi
             dismissPopup()
         }
         filterGroup.check(
-                if (DeftApp.filterTypeDocuments == Util.FILTER_WEEK)
-                    R.id.week_filter
-                else
-                    R.id.month_filter)
+            if (DeftApp.filterTypeDocuments == Util.FILTER_WEEK)
+                R.id.week_filter
+            else
+                R.id.month_filter
+        )
 
         filterGroup.setOnCheckedChangeListener { group, checkedId ->
             DeftApp.filterTypeDocuments = if (checkedId == R.id.week_filter)

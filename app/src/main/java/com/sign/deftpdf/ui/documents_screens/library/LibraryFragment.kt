@@ -92,9 +92,17 @@ class LibraryFragment : BaseFragment(R.layout.fragment_library), DocumentsView, 
         val signDocument: LinearLayout = view.findViewById(R.id.sign_document)
         val requestDocument: LinearLayout = view.findViewById(R.id.request_document)
 
+        val calendar = Calendar.getInstance()
+        val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+        sdf.timeZone = TimeZone.getTimeZone("UTC")
+        calendar.time = sdf.parse(data.updatedAt)
+
+        sdf.timeZone = TimeZone.getDefault()
+        val date = sdf.format(calendar.time)
+
         documentDetail.visibility = View.GONE
         documentName.text = data.originalName
-        documentDate.text = data.createdAt
+        documentDate.text = date
         documentImage.setImageResource(when (data.status) {
             "original" -> {
                 R.drawable.ic_document_original
@@ -116,12 +124,16 @@ class LibraryFragment : BaseFragment(R.layout.fragment_library), DocumentsView, 
             signDocument.visibility = View.GONE
             requestDocument.visibility = View.GONE
             sentToEmail.setOnClickListener {
-                val intent = Intent(Intent.ACTION_SENDTO)
-                intent.data = Uri.parse("mailto:")
-                intent.putExtra(Intent.EXTRA_EMAIL, DeftApp.user.email)
-                if (intent.resolveActivity(activity.packageManager) != null) {
-                    startActivity(intent)
-                }
+                val selectorIntent = Intent(Intent.ACTION_SENDTO)
+                selectorIntent.data = Uri.parse("mailto:")
+
+                val emailIntent = Intent(Intent.ACTION_SEND)
+                emailIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf(DeftApp.user.email))
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, data.originalName)
+                emailIntent.putExtra(Intent.EXTRA_TEXT, Util.DATA_URL+data.originalDocument)
+                emailIntent.selector = selectorIntent
+
+                activity.startActivity(Intent.createChooser(emailIntent, "Send email..."))
                 dismissPopup()
             }
             export.setOnClickListener {
@@ -148,6 +160,19 @@ class LibraryFragment : BaseFragment(R.layout.fragment_library), DocumentsView, 
         }
 
         details.setOnClickListener {
+            DocumentDetailsActivity.listener = object : OnDocumentDetailListener{
+                override fun documentDeleted() {
+                    list.removeAt(position)
+                    adapter.setDocuments(list)
+                    binding.count.text = list.size.toString()
+                }
+
+                override fun documentUpdate(newName: String) {
+                    list[position].originalName = newName
+                    adapter.notifyItemChanged(position)
+                }
+
+            }
             val intent = Intent(activity, DocumentDetailsActivity::class.java)
             intent.putExtra("document", data)
             startActivity(intent)

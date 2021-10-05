@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
 }
 
 android {
@@ -15,8 +17,8 @@ android {
         applicationId "com.sign.deftpdf"
         minSdkVersion 23
         targetSdkVersion 30
-        versionCode 5
-        versionName "2.1"
+        versionCode 12
+        versionName "3.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -65,6 +67,8 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.9.0'
     implementation 'com.github.castorflex.verticalviewpager:library:19.0.1'
     implementation 'com.github.bumptech.glide:glide:4.11.0'
+    implementation 'com.google.firebase:firebase-analytics-ktx:19.0.1'
+    implementation 'com.google.firebase:firebase-crashlytics-ktx:18.2.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
     implementation 'com.github.lany192:DateTimePicker:1.0.9'
 }
